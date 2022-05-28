@@ -20,14 +20,12 @@ services:
   backend-pizzaria:
     container_name: backend-pizzaria
     build: ./
-    environment: 
+    env_file:
+      - .env
+    environment:
       - DB_HOST=db
-      - DB_USER=root
-      - DB_PASSWORD=root
-      - DB_PORT=3306
-      - DB_NAME=pizzaria
     ports: 
-      - 8010:8000
+      - 8010:8010
     volumes:
       - "./src:/app/src"
     depends_on:
