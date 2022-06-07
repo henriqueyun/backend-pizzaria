@@ -6,7 +6,7 @@ import cors from 'cors'
 import sequelize from './sequelize.mjs'
 
 const app = express()
-app.use(express.json())
+app.use(express.json({ limit: '10mb'}))
 app.use(cors())
 
 app.use('/api/v1/', router)
