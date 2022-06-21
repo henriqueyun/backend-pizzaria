@@ -1,13 +1,13 @@
-import Pedido from '../classes/Pedido.mjs'
-import PedidoModel from '../models/pedidoModel.mjs'
-import PizzaItemPedidoModel from '../models/pizzaItemPedidoModel.mjs'
-import BebidaItemPedidoModel from '../models/bebidaItemPedidoModel.mjs'
-import PizzaModel from '../models/pizzaModel.mjs'
-import BebidaModel from '../models/bebidaModel.mjs'
+const Pedido = require('../classes/Pedido')
+const PedidoModel = require('../models/pedidoModel')
+const PizzaItemPedidoModel = require('../models/pizzaItemPedidoModel')
+const BebidaItemPedidoModel = require('../models/bebidaItemPedidoModel')
+const PizzaModel = require('../models/pizzaModel')
+const BebidaModel = require('../models/bebidaModel')
 
-import logger from '../logger.mjs'
+const logger = require('../logger')
 
-export async function cadastrar(req, res) {
+async function cadastrar(req, res) {
   const {
     nomeCliente,
     enderecoCliente,
@@ -81,7 +81,7 @@ async function cadastrarItensBebida(bebidas, pedidoId) {
   })
 }
 
-export async function atualizarStatus(req, res) {
+async function atualizarStatus(req, res) {
   const pedido = await PedidoModel.findOne({
       where: {
         id: req.params.id
@@ -113,7 +113,7 @@ export async function atualizarStatus(req, res) {
   }
 }
 
-export async function buscar(req, res) {
+async function buscar(req, res) {
   const pedido = await PedidoModel.findOne({
       where: {
         id: req.params.id
@@ -142,7 +142,7 @@ export async function buscar(req, res) {
   return res.status(200).json(pedido)
 }
 
-export async function buscarTodos(req, res) {
+async function buscarTodos(req, res) {
 
   const pedidos = await PedidoModel.findAll({
     include: [{
@@ -177,4 +177,4 @@ const pedidoController = {
   buscar,
   buscarTodos
 }
-export default pedidoController
+module.exports = pedidoController

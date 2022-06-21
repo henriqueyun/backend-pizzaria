@@ -1,5 +1,5 @@
-import { DataTypes } from 'sequelize'
-import sequelize from '../sequelize.mjs'
+const { DataTypes } = require('sequelize')
+const sequelize = require('../sequelize')
 
 const BebidaModel = sequelize.define('bebida', {
   nome: {
@@ -29,4 +29,4 @@ BebidaModel.sync()
     console.log('Bebida sincronizada')
   })
 
-export default BebidaModel
+module.exports = BebidaModel

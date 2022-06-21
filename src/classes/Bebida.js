@@ -1,4 +1,4 @@
-import Produto from './Produto.mjs'
+const Produto = require('./Produto')
 
 class Bebida extends Produto {
   constructor(nome, preco, imgURL, volume, alcoolica) {
@@ -8,4 +8,4 @@ class Bebida extends Produto {
   }
 }
 
-export default Bebida
+module.exports = Bebida

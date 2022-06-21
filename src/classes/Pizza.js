@@ -1,8 +1,10 @@
-import Produto from './Produto.mjs'
+const Produto = require('./Produto')
 
-export default class Pizza extends Produto {
+class Pizza extends Produto {
   constructor(nome, preco, imgURL, ingredientes) {
     super(nome, preco, imgURL)
     this.ingredientes = ingredientes
   }
 }
+
+module.exports = Pizza

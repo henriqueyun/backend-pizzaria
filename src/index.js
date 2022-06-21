@@ -1,9 +1,9 @@
-import express from 'express'
-import router from './router/index.mjs'
-import config from './config/index.mjs'
-import logger from './logger.mjs'
-import cors from 'cors'
-import sequelize from './sequelize.mjs'
+const express = require('express')
+const router = require('./router/index')
+const config = require('./config/index')
+const logger = require('./logger')
+const cors = require('cors')
+const sequelize = require('./sequelize')
 
 const app = express()
 app.use(express.json({ limit: '10mb'}))
@@ -19,4 +19,4 @@ server.on('error', (error) => {
   logger.error(error)
 })
 
-export default app 
+module.exports = app 

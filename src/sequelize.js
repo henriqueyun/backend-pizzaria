@@ -1,6 +1,6 @@
-import { Sequelize } from 'sequelize'
-import config from './config/index.mjs'
-import pino from 'pino'
+const { Sequelize } = require('sequelize')
+const config = require('./config/index')
+const pino = require('pino')
 
 const logger = pino()
 
@@ -15,4 +15,6 @@ const sequelize = new Sequelize(
     logging: message => logger.debug(message)
   },
 )
-export default sequelize
+
+
+module.exports = sequelize

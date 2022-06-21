@@ -9,4 +9,4 @@ const config = {
   imgurToken: process.env.IMGUR_TOKEN
 }
 
-export default config
+module.exports = config

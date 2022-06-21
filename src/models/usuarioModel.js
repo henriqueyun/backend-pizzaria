@@ -1,5 +1,5 @@
-import { DataTypes } from 'sequelize'
-import sequelize from '../sequelize.mjs'
+const { DataTypes } = require('sequelize')
+const sequelize  = require ('../sequelize')
 
 const UsuarioModel = sequelize.define('usuario', {
   username: {
@@ -31,4 +31,4 @@ UsuarioModel.sync()
     console.log('Usuario sincronizada')
   })
 
-export default UsuarioModel
+module.exports = UsuarioModel

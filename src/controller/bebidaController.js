@@ -1,8 +1,8 @@
-import Bebida from '../classes/Bebida.mjs'
-import BebidaModel from '../models/bebidaModel.mjs'
-import logger from '../logger.mjs'
+const Bebida = require('../classes/Bebida')
+const BebidaModel = require('../models/bebidaModel')
+const logger = require('../logger')
 
-export async function cadastrar(req, res) {
+async function cadastrar(req, res) {
   try {
     const { nome, preco, imgURL, volume, alcoolica } = req.body
     
@@ -20,7 +20,7 @@ export async function cadastrar(req, res) {
   }
 }
 
-export async function editar(req, res) {
+async function editar(req, res) {
   const bebida = await BebidaModel.findOne({ where: { id: req.params.id } })
   .catch(error => {
       logger.error('Erro buscar bebida!', error)
@@ -44,7 +44,7 @@ export async function editar(req, res) {
   }
 }
 
-export async function excluir(req, res) {
+async function excluir(req, res) {
   await BebidaModel.destroy({ where: { id: req.params.id } })
     .catch(error => {
       logger.error(`Erro excluir bebida! ${error}`)
@@ -53,7 +53,7 @@ export async function excluir(req, res) {
   res.sendStatus(200)
 }
 
-export async function buscar(req, res) {
+async function buscar(req, res) {
   const bebida = await BebidaModel.findOne({ where: { id: req.params.id } })
     .catch(error => {
       logger.error(`Erro buscar bebida!' ${error}`)
@@ -66,7 +66,7 @@ export async function buscar(req, res) {
   return res.status(200).json(bebida)
 }
 
-export async function buscarTodas(req, res) {
+async function buscarTodas(req, res) {
   const bebidas = await BebidaModel.findAll()
     .catch(error => {
       logger.error(`Erro ao buscar todas as bebidas ${error}`)
@@ -80,4 +80,4 @@ export async function buscarTodas(req, res) {
 
 const bebidaController = { cadastrar, editar, excluir, buscar, buscarTodas }
 
-export default bebidaController
+module.exports = bebidaController

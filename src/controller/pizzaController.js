@@ -1,11 +1,10 @@
-import Pizza from '../classes/Pizza.mjs'
-import PizzaModel from '../models/pizzaModel.mjs'
-import logger from '../logger.mjs'
-import axios from 'axios'
-import config from '../config/index.mjs'
-import FormData from 'form-data'
+const Pizza = require('../classes/Pizza')
+const PizzaModel = require('../models/pizzaModel')
+const logger = require('../logger')
+const axios = require('axios')
+const FormData = require('form-data')
 
-export async function cadastrar(req, res) {
+async function cadastrar(req, res) {
   try {
     let {
       nome,
@@ -31,7 +30,7 @@ export async function cadastrar(req, res) {
   }
 }
 
-export async function editar(req, res) {
+async function editar(req, res) {
   try {
     const pizza = await PizzaModel.findOne({
         where: {
@@ -65,7 +64,7 @@ export async function editar(req, res) {
   }
 }
 
-export async function excluir(req, res) {
+async function excluir(req, res) {
   const idPizza = req.params.id
   await PizzaModel.destroy({
       where: {
@@ -79,7 +78,7 @@ export async function excluir(req, res) {
   res.sendStatus(200)
 }
 
-export async function buscar(req, res) {
+async function buscar(req, res) {
   const pizza = await PizzaModel.findOne({
       where: {
         id: req.params.id
@@ -95,7 +94,7 @@ export async function buscar(req, res) {
   return res.status(200).json(pizza)
 }
 
-export async function buscarTodas(req, res) {
+async function buscarTodas(req, res) {
   const pizzas = await PizzaModel.findAll()
     .catch(error => {
       logger.error(`Erro ao buscar todas as pizzas ${error}`)
@@ -138,4 +137,4 @@ const pizzaController = {
   buscarTodas
 }
 
-export default pizzaController
+module.exports = pizzaController

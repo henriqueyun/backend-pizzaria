@@ -1,5 +1,5 @@
-import { DataTypes } from 'sequelize'
-import sequelize from '../sequelize.mjs'
+const { DataTypes } = require('sequelize')
+const sequelize = require('../sequelize')
 
 const PizzaModel = sequelize.define('pizza', {
   nome: {
@@ -17,6 +17,14 @@ const PizzaModel = sequelize.define('pizza', {
   ingredientes: {
     type: DataTypes.STRING,
     allowNull: true
+  },
+  alcoolica: {
+    type: DataTypes.BOOLEAN,
+    allowNull: false
+  },
+  volume: {
+    type: DataTypes.SMALLINT,
+    allowNull: false
   }
 })
 
@@ -25,4 +33,4 @@ PizzaModel.sync()
     console.log('Pizza sincronizada')
   })
 
-export default PizzaModel
+module.exports = PizzaModel

@@ -1,6 +1,6 @@
-import { DataTypes } from 'sequelize'
-import sequelize from '../sequelize.mjs'
-import PedidoModel from './pedidoModel.mjs'
+const { DataTypes } = require('sequelize')
+const sequelize = require('../sequelize')
+const PedidoModel = require('./pedidoModel')
 
 const PizzaItemPedido = sequelize.define('pizzaItemPedido', {
   pedidoId: {
@@ -23,7 +23,7 @@ const PizzaItemPedido = sequelize.define('pizzaItemPedido', {
   }
 })
 
-import PizzaModel from './pizzaModel.mjs'
+const PizzaModel = require('./pizzaModel')
 
 PedidoModel.belongsToMany(PizzaModel, { through: PizzaItemPedido })
 PedidoModel.hasMany(PizzaItemPedido, {
@@ -40,4 +40,4 @@ PizzaItemPedido.sync()
     console.log('PizzaItemPedido sincronizado')
   })
 
-export default PizzaItemPedido
+module.exports = PizzaItemPedido

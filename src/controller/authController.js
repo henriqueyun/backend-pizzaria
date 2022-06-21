@@ -1,5 +1,5 @@
-import jwt from 'jsonwebtoken'
-import UsuarioModel from '../models/usuarioModel.mjs'
+const jwt = require('jsonwebtoken')
+const UsuarioModel = require('../models/usuarioModel')
 
 async function login(req, res) {
 
@@ -110,7 +110,7 @@ async function logout(req, res) {
   res.sendStatus(204)
 }
 
-export default {
+module.exports = {
   login,
   authorize,
   logout

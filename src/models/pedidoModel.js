@@ -1,5 +1,5 @@
-import { DataTypes } from 'sequelize'
-import sequelize from '../sequelize.mjs'
+const { DataTypes } = require('sequelize')
+const sequelize = require('../sequelize')
 
 const PedidoModel = sequelize.define('pedido', {
   nomeCliente: {
@@ -33,4 +33,4 @@ PedidoModel.sync()
     console.log('PedidoModel sincronizado')
   })
   
-export default PedidoModel
+module.exports = PedidoModel
