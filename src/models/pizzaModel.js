@@ -1,5 +1,8 @@
-const { DataTypes } = require('sequelize')
+const {
+  DataTypes
+} = require('sequelize')
 const sequelize = require('../sequelize')
+const logger = require('../logger')
 
 const PizzaModel = sequelize.define('pizza', {
   nome: {
@@ -30,7 +33,7 @@ const PizzaModel = sequelize.define('pizza', {
 
 PizzaModel.sync()
   .then(() => {
-    console.log('Pizza sincronizada')
+    logger.info('Pizza sincronizada')
   })
 
 module.exports = PizzaModel

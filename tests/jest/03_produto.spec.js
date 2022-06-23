@@ -1,8 +1,10 @@
-const supertest = require('supertest')
-const app = require('../index')
-const Produto = require('../classes/Produto')
+const { app, supertest } = require('./00_setup')
 
+const Produto = require('../../src/classes/Produto')
+
+let endpointProduto = '/api/v1/produto'
 let idPizza = 0
+
 const pizza = new Produto({
   nome: 'Mumuçarela',
   preco: 34.50,
@@ -21,34 +23,33 @@ const bebida = new Produto({
 })
 
 describe('CRUD produto', () => {
-
   it('Deve cadastrar um produto', async () => {
     await supertest(app)
-      .post('/api/v1/produto')
+      .post(endpointProduto)
       .send(bebida)
       .expect(201)
 
-    const responsePizza = await supertest(app)
-      .post('/api/v1/produto')
+    const novaPizza = await supertest(app)
+      .post(endpointProduto)
       .send(pizza)
       .expect(201)
-    idPizza = responsePizza.body.id
+    idPizza = novaPizza.body.id
   })
 
   it('Deve buscar um produto', async () => {
-    const pizzaEncontrada = await supertest(app)
-      .get(`/api/v1/produto/${idPizza}`)
+    const pizzaBuscada = await supertest(app)
+      .get(`${endpointProduto}/${idPizza}`)
       .expect(200)
-    expect(pizzaEncontrada.body.nome).toBe(pizza.nome)
-    expect(pizzaEncontrada.body.preco).toBe(pizza.preco)
-    expect(pizzaEncontrada.body.tipo).toBe(pizza.tipo)
-    expect(pizzaEncontrada.body.imgURL).toBe(pizza.imgURL)
-    expect(pizzaEncontrada.body.ingredientes).toBe(pizza.ingredientes)
+    expect(pizzaBuscada.body.nome).toBe(pizza.nome)
+    expect(pizzaBuscada.body.preco).toBe(pizza.preco)
+    expect(pizzaBuscada.body.tipo).toBe(pizza.tipo)
+    expect(pizzaBuscada.body.imgURL).toBe(pizza.imgURL)
+    expect(pizzaBuscada.body.ingredientes).toBe(pizza.ingredientes)
   })
 
   it('Deve buscar diferentes produtos', async () => {
     const produtosEncontrados = await supertest(app)
-      .get(`/api/v1/produto/all`)
+      .get(`${endpointProduto}/all`)
       .expect(200)
     expect(produtosEncontrados.body.length).toBeGreaterThanOrEqual(2)
   })
@@ -57,7 +58,7 @@ describe('CRUD produto', () => {
     pizza.nome = 'Nomuçarela'
     pizza.preco = 45
     const pizzaEditada = await supertest(app)
-      .put(`/api/v1/produto/${idPizza}`)
+      .put(`${endpointProduto}/${idPizza}`)
       .send(pizza)
       .expect(200)
     expect(pizzaEditada.body.nome).toBe('Nomuçarela')
@@ -66,7 +67,7 @@ describe('CRUD produto', () => {
 
   it('Deve excluir um produto', async () => {
     await supertest(app)
-      .delete(`/api/v1/produto/${idPizza}`)
+      .delete(`${endpointProduto}/${idPizza}`)
       .expect(200)
   })
 })

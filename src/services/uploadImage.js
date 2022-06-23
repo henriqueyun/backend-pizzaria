@@ -15,7 +15,7 @@ async function uploadImage(imageURL) {
 
   const uploadResponse = await axios.post('https://api.imgur.com/3/upload', imageFormData, {
       headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
+        'Content-Type': 'application/x-www-form-urlencoded',
         authorization: `Client-ID 9dab4a9f9067d57`
       }
     })

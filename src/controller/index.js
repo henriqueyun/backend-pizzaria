@@ -1,15 +1,15 @@
-const pizzaController = require('./pizzaController')
-const bebidaController = require('./bebidaController')
-const pedidoController = require('./pedidoController')
-const authController = require('./authController')
 const produtoController = require('./produtoController')
+const pedidoController = require('./pedidoController')
+const usuarioController = require('./usuarioController')
+const authController = require('./authController')
+const healthController = require('./healthController')
 
 const controller = {
-  pizzaController,
-  bebidaController,
+  produtoController,
   pedidoController,
+  usuarioController,
   authController,
-  produtoController
+  healthController
 }
 
 module.exports = controller

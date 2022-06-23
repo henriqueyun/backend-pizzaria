@@ -1,101 +1,63 @@
 const Pedido = require('../classes/Pedido')
 const PedidoModel = require('../models/pedidoModel')
-const PizzaItemPedidoModel = require('../models/pizzaItemPedidoModel')
-const BebidaItemPedidoModel = require('../models/bebidaItemPedidoModel')
-const PizzaModel = require('../models/pizzaModel')
-const BebidaModel = require('../models/bebidaModel')
-
+const ProdutoModel = require('../models/produtoModel')
+const ItemPedidoModel = require('../models/itemPedidoModel')
 const logger = require('../logger')
 
 async function cadastrar(req, res) {
-  const {
-    nomeCliente,
-    enderecoCliente,
-    telefoneCliente,
-    formaPagamento,
-    observacao
-  } = req.body
 
-  const status = 'entrada'
-
-  const {
-    itensPedido
-  } = req.body
-  
-  const pedido =
-    new Pedido(nomeCliente,
-      enderecoCliente,
-      telefoneCliente,
-      itensPedido,
-      formaPagamento,
-      status,
-      observacao)
-
-  const novoPedido = PedidoModel.build(pedido)
-  await novoPedido.save()
-    .catch(error => {
-      logger.error(`Erro cadastrar pedido! ${error}`)
-      return res.sendStatus(500)
-    })
-
+  const novoPedido = new Pedido(req.body)
+  const registroPedido = PedidoModel.build(novoPedido)
   try {
-    await cadastrarItensPizza(pedido.itensPedido.pizzas, novoPedido.id)
-    await cadastrarItensBebida(pedido.itensPedido.bebidas, novoPedido.id)
+    await registroPedido.save()
+    await adicionarItensPedido(novoPedido.itensPedido, registroPedido.dataValues.id)
   } catch (error) {
+    const errorMessage = `Erro ao cadastrar pedido: ${error.message}`
+    logger.error(errorMessage)
     return res.sendStatus(500)
   }
-
   return res.status(201).json({
-    id: novoPedido.id
+    id: registroPedido.id
   })
 }
 
-async function cadastrarItensPizza(pizzas, pedidoId) {
-  pizzas.map(pizza => {
-    pizza.pedidoId = pedidoId
-    return pizza
+async function adicionarItensPedido(itensPedido, pedidoId) {
+  itensPedido.map(item => {
+    item.produtoId = item.produto.id
+    item.pedidoId = pedidoId
+    return item
   })
 
-  await pizzas.forEach(async (itemPizza) => {
-    const novoItemPizza = PizzaItemPedidoModel.build(itemPizza)
-    await novoItemPizza.save()
+  await itensPedido.forEach(async (item) => {
+
+    const registroItemPedido = ItemPedidoModel.build(item)
+    await registroItemPedido.save()
       .catch(error => {
-        return Promise.reject(`Erro ao cadastrar item pizza ${error}`)
-      })
-  })
-}
-
-async function cadastrarItensBebida(bebidas, pedidoId) {
-
-  bebidas.map(bebida => {
-    bebida.pedidoId = pedidoId
-    return bebida
-  })
-
-  await bebidas.forEach(async (itemBebida) => {
-    const novoItemBebida = BebidaItemPedidoModel.build(itemBebida)
-    await novoItemBebida.save()
-      .catch(error => {
-        return Promise.reject(`Erro ao cadastrar item bebida ${error}`)
+        return Promise.reject(`Erro ao cadastrar o item do pedido de código ${item.id}: ${error.message}`)
       })
   })
 }
 
 async function atualizarStatus(req, res) {
-  const pedido = await PedidoModel.findOne({
-      where: {
-        id: req.params.id
-      }
-    })
-    .catch(error => {
-      logger.error('Erro buscar pedido', error)
-      return res.sendStatus(500)
-    })
-
-  if (!pedido) {
-    return res.sendStatus(404)
-  }
+  const {
+    id
+  } = req.params
   try {
+    const pedido = await PedidoModel.findOne({
+        where: {
+          id
+        }
+      })
+      .catch(error => {
+        const errorMessage = `Erro ao realizar atualização de status do pedido com o código ${id}: ${error.message}`
+        logger.error(errorMessage)
+        return res.status(500).send(errorMessage)
+      })
+
+    if (!pedido) {
+      return res.sendStatus(404)
+    }
+
     const {
       status
     } = req.body
@@ -103,71 +65,59 @@ async function atualizarStatus(req, res) {
       status
     })
     await pedido.save()
-      .catch(error => {
-        logger.error('Erro atualizar pedido', error)
-      })
+
     return res.sendStatus(200)
   } catch (error) {
-    logger.error(error)
-    return res.sendStatus(500)
+    const errorMessage = `Erro ao atualizar pedidos: ${error.message}!`
+    logger.error(errorMessage)
+    return res.status(500).send(errorMessage)
   }
 }
 
 async function buscar(req, res) {
+  const {
+    id
+  } = req.params
   const pedido = await PedidoModel.findOne({
       where: {
-        id: req.params.id
+        id
       },
       include: [{
-          model: PizzaItemPedidoModel,
-          include: [{
-            model: PizzaModel
-          }]
-        },
-        {
-          model: BebidaItemPedidoModel,
-          include: [{
-            model: BebidaModel
-          }]
-        }
-      ]
+        model: ItemPedidoModel,
+        include: [{
+          model: ProdutoModel
+        }]
+      }]
     })
     .catch(error => {
-      logger.error('Erro buscar pedido!', error)
-      return res.sendStatus(500)
+      const errorMessage = `Houve um erro ao buscar pedidos: ${error.message}!`
+      logger.error(errorMessage)
+      return res.status(500).send(errorMessage)
     })
   if (!pedido) {
-    return res.status(404).send('Pizza not found')
+    return res.status(404).send(`Não foi possível encontrar pedido com o código ${id}`)
   }
   return res.status(200).json(pedido)
 }
 
-async function buscarTodos(req, res) {
+async function buscarTodos(_, res) {
 
   const pedidos = await PedidoModel.findAll({
     include: [{
-        model: PizzaItemPedidoModel,
-        include: [{
-          model: PizzaModel
-        }]
-      },
-      {
-        model: BebidaItemPedidoModel,
-        include: [{
-          model: BebidaModel
-        }]
-      }
-    ]
+      model: ItemPedidoModel,
+      include: [{
+        model: ProdutoModel
+      }]
+    }]
   }).catch(error => {
-    logger.error(`Erro buscar pedido ${error}`)
-    return res.sendStatus(500)
+    const errorMessage = `Houve um ao buscar pedidos: ${error.message}!`
+    logger.error(errorMessage)
+    return res.status(500).send(errorMessage)
   })
 
   if (!pedidos.length) {
-    logger.error('Pedido not found')
-    return res.sendStatus(404)
+    return res.status(404).send('Não existem pedidos cadastrados')
   }
-
   return res.status(200).json(pedidos)
 }
 

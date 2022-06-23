@@ -1,5 +1,5 @@
 import 'dotenv/config'
-import app from '../src/index.mjs'
+import app from '../src/app.js'
 import chai from 'chai'
 import chai_http from 'chai-http'
 export const expect = chai.expect

@@ -1,6 +1,9 @@
-const { DataTypes } = require('sequelize')
+const {
+  DataTypes
+} = require('sequelize')
 const sequelize = require('../sequelize')
 const PedidoModel = require('./pedidoModel')
+const logger = require('../logger')
 
 const BebidaItemPedido = sequelize.define('bebidaItemPedido', {
   pedidoId: {
@@ -25,7 +28,9 @@ const BebidaItemPedido = sequelize.define('bebidaItemPedido', {
 
 const BebidaModel = require('./bebidaModel')
 
-PedidoModel.belongsToMany(BebidaModel, { through: BebidaItemPedido })
+PedidoModel.belongsToMany(BebidaModel, {
+  through: BebidaItemPedido
+})
 PedidoModel.hasMany(BebidaItemPedido, {
   foreignKey: 'pedidoId',
   sourceKey: 'id'
@@ -37,7 +42,7 @@ BebidaItemPedido.hasOne(BebidaModel, {
 
 BebidaItemPedido.sync()
   .then(() => {
-    console.log('BebidaItemPedido sincronizado')
+    logger.info('BebidaItemPedido sincronizado')
   })
 
 module.exports = BebidaItemPedido

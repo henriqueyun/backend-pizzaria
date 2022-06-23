@@ -16,10 +16,10 @@ async function cadastrar(req, res) {
 }
 
 async function editar(req, res) {
+  const {
+    id
+  } = req.params
   try {
-    const {
-      id
-    } = req.params
     const registroProduto = await ProdutoModel.findOne({
       where: {
         id
@@ -58,7 +58,6 @@ async function excluir(req, res) {
   const {
     id
   } = req.params
-
   await ProdutoModel.destroy({
       where: {
         id
@@ -93,10 +92,10 @@ async function buscarUma(req, res) {
   return res.status(200).json(produto)
 }
 
-async function buscarTodas(_, res) {
+async function buscarTodos(_, res) {
   const registrosProdutos = await ProdutoModel.findAll()
     .catch(error => {
-      const errorMessage = `Houve um ao buscar produtos: ${error.message}!`
+      const errorMessage = `Houve um erro ao buscar produtos: ${error.message}!`
       logger.error(errorMessage)
       return res.status(500).send(errorMessage)
     })
@@ -106,13 +105,12 @@ async function buscarTodas(_, res) {
   return res.status(200).json(registrosProdutos)
 }
 
-
 const produtoController = {
   cadastrar,
   editar,
   excluir,
   buscarUma,
-  buscarTodas
+  buscarTodos
 }
 
 module.exports = produtoController

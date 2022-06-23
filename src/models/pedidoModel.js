@@ -1,5 +1,8 @@
-const { DataTypes } = require('sequelize')
+const {
+  DataTypes
+} = require('sequelize')
 const sequelize = require('../sequelize')
+const logger = require('../logger')
 
 const PedidoModel = sequelize.define('pedido', {
   nomeCliente: {
@@ -11,7 +14,7 @@ const PedidoModel = sequelize.define('pedido', {
     allowNull: false
   },
   telefoneCliente: {
-    type: DataTypes.BIGINT,
+    type: DataTypes.STRING,
     allowNull: false
   },
   formaPagamento: {
@@ -30,7 +33,7 @@ const PedidoModel = sequelize.define('pedido', {
 
 PedidoModel.sync()
   .then(() => {
-    console.log('PedidoModel sincronizado')
+    logger.info('PedidoModel sincronizado')
   })
-  
+
 module.exports = PedidoModel

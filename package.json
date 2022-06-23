@@ -2,12 +2,12 @@
   "name": "backend-pizzaria",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "test:mocha": "npx mocha --experimental-modules tests/main.test.mjs --exit",
-    "test:jest": "jest",
-    "dev": "nodemon -r dotenv/config src/index.js",
-    "start": "node src/index.mjs"
+    "test:jest": "npx jest",
+    "dev": "nodemon -r dotenv/config src/server.js",
+    "start": "node src/server.js"
   },
   "keywords": [],
   "author": "",

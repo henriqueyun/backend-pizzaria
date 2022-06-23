@@ -5,7 +5,7 @@ const sequelize = require('../sequelize')
 const PedidoModel = require('./pedidoModel')
 const logger = require('../logger')
 
-const PizzaItemPedido = sequelize.define('pizzaItemPedido', {
+const ItemPedidoModel = sequelize.define('itemPedido', {
   pedidoId: {
     type: DataTypes.INTEGER,
     references: {
@@ -13,10 +13,10 @@ const PizzaItemPedido = sequelize.define('pizzaItemPedido', {
       key: 'id'
     }
   },
-  pizzaId: {
+  produtoId: {
     type: DataTypes.INTEGER,
     references: {
-      model: 'Pizza',
+      model: 'Produto',
       key: 'id'
     }
   },
@@ -26,23 +26,23 @@ const PizzaItemPedido = sequelize.define('pizzaItemPedido', {
   }
 })
 
-const PizzaModel = require('./pizzaModel')
+const ProdutoModel = require('./produtoModel')
 
-PedidoModel.belongsToMany(PizzaModel, {
-  through: PizzaItemPedido
+PedidoModel.belongsToMany(ProdutoModel, {
+  through: ItemPedidoModel
 })
-PedidoModel.hasMany(PizzaItemPedido, {
+PedidoModel.hasMany(ItemPedidoModel, {
   foreignKey: 'pedidoId',
   sourceKey: 'id'
 })
-PizzaItemPedido.hasOne(PizzaModel, {
+ItemPedidoModel.hasOne(ProdutoModel, {
   foreignKey: 'id',
-  sourceKey: 'pizzaId'
+  sourceKey: 'produtoId'
 })
 
-PizzaItemPedido.sync()
+ItemPedidoModel.sync()
   .then(() => {
-    logger.info('PizzaItemPedido sincronizado')
+    logger.info('ItemPedido sincronizado')
   })
 
-module.exports = PizzaItemPedido
+module.exports = ItemPedidoModel

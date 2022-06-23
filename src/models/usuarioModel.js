@@ -1,5 +1,8 @@
-const { DataTypes } = require('sequelize')
-const sequelize  = require ('../sequelize')
+const {
+  DataTypes
+} = require('sequelize')
+const sequelize = require('../sequelize')
+const logger = require('../logger')
 
 const UsuarioModel = sequelize.define('usuario', {
   username: {
@@ -28,7 +31,7 @@ const UsuarioModel = sequelize.define('usuario', {
 
 UsuarioModel.sync()
   .then(() => {
-    console.log('Usuario sincronizada')
+    logger.info('Usuario sincronizada')
   })
 
 module.exports = UsuarioModel
