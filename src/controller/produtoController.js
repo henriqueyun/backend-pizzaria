@@ -1,21 +1,22 @@
 const ProdutoService = require('../services/ProdutoService')
 const ValidatorProduto = require('./validators/ValidatorProduto')
+const existirErros = require('./validators/erros')
 const logger = require('../logger')
 
 async function cadastrar(req, res) {
   try {
     const erros = ValidatorProduto.validar.cadastro(req.body)
-    if (erros.length) {
+    const mensagemErro = existirErros(erros)
+    if (mensagemErro) {
       return res.status(400).json({
-        erros: erros.join('\n')
+        erros: mensagemErro
       })
     }
     const produto = await ProdutoService.cadastrar(req.body)
     return res.status(201).json(produto)
   } catch (error) {
-    const errorMessage = `Erro ao cadastrar produto: ${error.message}`
-    logger.error(errorMessage)
-    return res.status(500).send(errorMessage)
+    logger.error(error.message)
+    return res.sendStatus(500)
   }
 }
 
@@ -24,10 +25,11 @@ async function editar(req, res) {
     const {
       id
     } = req.params
-    const erros = ValidatorProduto.validar.edicao(req.body)
-    if (erros.length) {
+    const erros = ValidatorProduto.validar.edicao(id, req.body)
+    const mensagemErro = existirErros(erros)
+    if (mensagemErro) {
       return res.status(400).json({
-        erros: erros.join('\n')
+        erros: mensagemErro
       })
     }
     const produto = await ProdutoService.editar(id, req.body)
@@ -46,7 +48,11 @@ async function excluir(req, res) {
     const {
       id
     } = req.params
-    await ProdutoService.excluir(id)
+    const produto = await ProdutoService.excluir(id)
+    if (!produto) {
+      return res.status(404).send('Não foi possível encontrar o produto')
+    }
+    return res.status(200).json(produto)
   } catch (error) {
     logger.error(error)
     return res.sendStatus(500)
@@ -59,6 +65,13 @@ async function buscarUma(req, res) {
     const {
       id
     } = req.params
+    const erros = ValidatorProduto.validar.exclusao(id)
+    const mensagemErro = existirErros(erros)
+    if (mensagemErro) {
+      return res.status(400).json({
+        erros: mensagemErro
+      })
+    }
     const produto = await ProdutoService.buscarUma(id)
     if (!produto) {
       return res.status(404).send(`Não foi possível encontrar produto com o código ${id}`)

@@ -1,5 +1,6 @@
 class Pedido {
   /** Pedido
+   * @param {number} id - Código do pedido
    * @param {Cliente} cliente - O cliente que realizou o pedido
    * @param {ItemPedido[]} itensPedido - O conjunto de itens pertencentes ao pedido
    * @param {string} formaPagamento - A forma de pagamento
@@ -7,6 +8,7 @@ class Pedido {
    * @param {string} observacao - A observação ou as anotações feitas pelo cliente sobre o pedido
    */
   constructor({
+    id = '',
     cliente,
     itensPedido = [],
     formaPagamento,
@@ -21,6 +23,7 @@ class Pedido {
     this.telefoneCliente = cliente.telefone
     this.enderecoCliente = cliente.endereco
 
+    this.id = id
     this.itensPedido = itensPedido
     this.formaPagamento = formaPagamento
     this.status = status

@@ -6,7 +6,7 @@ class Usuario {
   * @param {string} role - O papel ou cargo do usuário no sistema
   * @param {string} activeSession - O hash da sessão ativa do usuário
   */
-  constructor({username, password, fullName, role, activeSession} = {}) {
+  constructor({username, password, fullName, role, activeSession = ''} = {}) {
     this.username = username
     this.password = password
     this.fullName = fullName

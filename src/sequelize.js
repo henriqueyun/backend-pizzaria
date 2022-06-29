@@ -1,8 +1,6 @@
 const { Sequelize } = require('sequelize')
 const config = require('./config/index')
-const pino = require('pino')
-
-const logger = pino()
+const logger = require('./logger')
 
 const sequelize = new Sequelize(
   config.databaseName,

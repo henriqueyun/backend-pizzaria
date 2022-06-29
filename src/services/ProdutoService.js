@@ -3,9 +3,15 @@ const ProdutoModel = require('../models/produtoModel')
 const logger = require('../logger')
 
 async function cadastrar(produtoData) {
-  const produto = new Produto(produtoData)
-  const registroProduto = ProdutoModel.build(produto)
-  return await registroProduto.save()
+  try {
+    const produto = new Produto(produtoData)
+    const registroProduto = ProdutoModel.build(produto)
+    return await registroProduto.save()
+  } catch (error) {
+    const errorMessage = `Erro ao cadastrar produto: ${error.message}`
+    logger.error(errorMessage)
+    throw new Error(errorMessage)
+  }
 }
 
 async function editar(id, produtoData) {
