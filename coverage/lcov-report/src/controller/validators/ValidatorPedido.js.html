@@ -23,16 +23,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">76.78% </span>
+                <span class="strong">80.7% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>43/56</span>
+                <span class='fraction'>46/57</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">53.84% </span>
+                <span class="strong">64.28% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>7/13</span>
+                <span class='fraction'>9/14</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">76.78% </span>
+                <span class="strong">80.7% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>43/56</span>
+                <span class='fraction'>46/57</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line medium'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -118,7 +118,8 @@
 <a name='L53'></a><a href='#L53'>53</a>
 <a name='L54'></a><a href='#L54'>54</a>
 <a name='L55'></a><a href='#L55'>55</a>
-<a name='L56'></a><a href='#L56'>56</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L56'></a><a href='#L56'>56</a>
+<a name='L57'></a><a href='#L57'>57</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -151,83 +152,85 @@
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">1x</span></td><td class="text"><pre class="prettyprint lang-js">const {
-  hasCamposVazios
+	hasCamposVazios
 } = require('./util')
 &nbsp;
 const camposObrigatorios = ['cliente', 'itensPedido', 'formaPagamento', 'status']
 const camposClienteObrigatorios = ['nome', 'endereco', 'telefone']
-module.exports = ValidatorPedido = {
-  validar: {
-    cadastro: (pedido) =&gt; {
-      const erros = []
-      if (hasCamposVazios(pedido, camposObrigatorios)) <span class="branch-0 cbranch-no" title="branch not covered" >{</span>
-<span class="cstat-no" title="statement not covered" >        erros.push(`Há campos obrigatórios em branco. Campos obrigatórios\n ${camposObrigatorios.join('\n')}`)</span>
-<span class="cstat-no" title="statement not covered" >        return erros</span>
-<span class="cstat-no" title="statement not covered" >      }</span>
-      if (hasCamposVazios(pedido.cliente, camposClienteObrigatorios)) <span class="branch-0 cbranch-no" title="branch not covered" >{</span>
-<span class="cstat-no" title="statement not covered" >        erros.push(`Há campos obrigatórios em branco. Campos obrigatórios\n ${camposClienteObrigatorios.join('\n')}`)</span>
-<span class="cstat-no" title="statement not covered" >        return erros</span>
-<span class="cstat-no" title="statement not covered" >      }</span>
-      regrasPedido.pedidoBody(pedido, erros)
-      return erros
-    },
-    atualizacaoStatus: (id, status) =&gt; {
-      const erros = []
-      if (!id || id &lt;= 0) <span class="branch-0 cbranch-no" title="branch not covered" >{</span>
-<span class="cstat-no" title="statement not covered" >        erros.push(`É necessário informar um código válido de pedido para atualização de status`)</span>
-<span class="cstat-no" title="statement not covered" >        return erros</span>
-<span class="cstat-no" title="statement not covered" >      }</span>
-      if (!status) {
-        erros.push(`É necessário informar um status válido de pedido para atualização de status`)
-      }
-      return erros
-    },
-    busca: (id) =&gt; {
-      const erros = []
-      if (!id || id &lt;= 0) <span class="branch-0 cbranch-no" title="branch not covered" >{</span>
-<span class="cstat-no" title="statement not covered" >        erros.push('É necessário informar um código válido de pedido para busca')</span>
-<span class="cstat-no" title="statement not covered" >      }</span>
-      return erros
-    }
-  }
+module.exports = {
+	validar: {
+		cadastro: (pedido) =&gt; {
+			const erros = []
+			if (hasCamposVazios(pedido, camposObrigatorios)) <span class="branch-0 cbranch-no" title="branch not covered" >{</span>
+<span class="cstat-no" title="statement not covered" >				erros.push(`Há campos obrigatórios em branco. Campos obrigatórios\n ${camposObrigatorios.join('\n')}`)</span>
+<span class="cstat-no" title="statement not covered" >				return erros</span>
+<span class="cstat-no" title="statement not covered" >			}</span>
+			if (hasCamposVazios(pedido.cliente, camposClienteObrigatorios)) <span class="branch-0 cbranch-no" title="branch not covered" >{</span>
+<span class="cstat-no" title="statement not covered" >				erros.push(`Há campos obrigatórios em branco. Campos obrigatórios\n ${camposClienteObrigatorios.join('\n')}`)</span>
+<span class="cstat-no" title="statement not covered" >				return erros</span>
+<span class="cstat-no" title="statement not covered" >			}</span>
+			regrasPedido.pedidoBody(pedido, erros)
+			return erros
+		},
+		atualizacaoStatus: (id, status) =&gt; {
+			const erros = []
+			if (!id || id &lt;= 0) <span class="branch-0 cbranch-no" title="branch not covered" >{</span>
+<span class="cstat-no" title="statement not covered" >				erros.push('É necessário informar um código válido de pedido para atualização de status')</span>
+<span class="cstat-no" title="statement not covered" >				return erros</span>
+<span class="cstat-no" title="statement not covered" >			}</span>
+			if (!status) {
+				erros.push('É necessário informar um status válido de pedido para atualização de status')
+			}
+			return erros
+		},
+		busca: (id) =&gt; {
+			const erros = []
+			if (!id || id &lt;= 0) {
+				erros.push('É necessário informar um código válido de pedido para busca')
+			}
+			return erros
+		}
+	}
 }
 &nbsp;
 const regrasPedido = {
-  pedidoBody: (pedido, erros) =&gt; {
-    if (!pedido.itensPedido.length) {
-      erros.push('O pedido deve possuir algum item')
-    }
-    const existirItensComQtd0 = pedido.itensPedido.some(item =&gt; {
-      return <span class="branch-0 cbranch-no" title="branch not covered" >!item.qtd &amp;&amp; item.qtd &lt;= 0</span>
-    })
-    if (existirItensComQtd0) <span class="branch-0 cbranch-no" title="branch not covered" >{</span>
-<span class="cstat-no" title="statement not covered" >      erros.push('O pedido não deve possuir itens com quantidade menor ou igual a zero')</span>
-<span class="cstat-no" title="statement not covered" >    }</span>
-    return erros
-  }
+	pedidoBody: (pedido, erros) =&gt; {
+		if (!pedido.itensPedido.length) {
+			erros.push('O pedido deve possuir algum item')
+			return erros
+		}
+		const existirItensComQtd0 = pedido.itensPedido.some(item =&gt; {
+			return <span class="branch-0 cbranch-no" title="branch not covered" >!item.qtd &amp;&amp; item.qtd &lt;= 0</span>
+		})
+		if (existirItensComQtd0) <span class="branch-0 cbranch-no" title="branch not covered" >{</span>
+<span class="cstat-no" title="statement not covered" >			erros.push('O pedido não deve possuir itens com quantidade menor ou igual a zero')</span>
+<span class="cstat-no" title="statement not covered" >		}</span>
+		return erros
+	}
 }</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
@@ -235,7 +238,7 @@ const regrasPedido = {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at Tue Jun 28 2022 22:33:16 GMT-0300 (Brasilia Standard Time)
+                at Thu Jun 30 2022 02:32:54 GMT-0300 (Brasilia Standard Time)
             </div>
         <script src="../../../prettify.js"></script>
         <script>

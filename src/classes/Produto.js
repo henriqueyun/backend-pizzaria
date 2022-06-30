@@ -1,5 +1,5 @@
 class Produto {
-  /** Produto
+	/** Produto
   * @param {string} nome - O nome/descrição do produto
   * @param {number} preco - O preço em reais do produto
   * @param {string} imgURL - A URL de referência de uma imagem de produto
@@ -8,16 +8,16 @@ class Produto {
   * @param {string} alcoolica - Se o produto contem álcool ou não
   * @param {number} volume - O volume em mililitros do produto 
   */
-  constructor({id = undefined, nome, preco, imgURL, tipo, ingredientes, alcoolica, volume} = {}) {
-    this.id = id
-    this.nome = nome
-    this.preco = preco
-    this.imgURL = imgURL || ''
-    this.tipo = tipo || ''
-    this.ingredientes = ingredientes || ''
-    this.alcoolica = alcoolica || ''
-    this.volume = volume || ''
-  }
+	constructor({id = undefined, nome, preco, imgURL, tipo, ingredientes, alcoolica, volume} = {}) {
+		this.id = id
+		this.nome = nome
+		this.preco = preco
+		this.imgURL = imgURL || ''
+		this.tipo = tipo
+		this.ingredientes = ingredientes || ''
+		this.alcoolica = alcoolica || ''
+		this.volume = volume || ''
+	}
 }
 
 module.exports = Produto

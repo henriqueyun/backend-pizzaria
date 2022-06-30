@@ -5,11 +5,11 @@
  * @returns {boolean} Se houverem campos em branco/indefinidos retorna `true` caso contrário retorna `false`
  */
 function hasCamposVazios(objeto, camposObrigatorios) {
-  return camposObrigatorios.some(campo => {
-    return objeto[campo] === '' || objeto[campo] === undefined
-  })
+	return camposObrigatorios.some(campo => {
+		return objeto[campo] === '' || objeto[campo] === undefined
+	})
 }
 
 module.exports = {
-  hasCamposVazios
+	hasCamposVazios
 }

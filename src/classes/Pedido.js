@@ -1,5 +1,5 @@
 class Pedido {
-  /** Pedido
+	/** Pedido
    * @param {number} id - Código do pedido
    * @param {Cliente} cliente - O cliente que realizou o pedido
    * @param {ItemPedido[]} itensPedido - O conjunto de itens pertencentes ao pedido
@@ -7,28 +7,28 @@ class Pedido {
    * @param {string} status - O status do pedido
    * @param {string} observacao - A observação ou as anotações feitas pelo cliente sobre o pedido
    */
-  constructor({
-    id = '',
-    cliente,
-    itensPedido = [],
-    formaPagamento,
-    status,
-    observacao
-  } = {}) {
+	constructor({
+		id = '',
+		cliente,
+		itensPedido = [],
+		formaPagamento,
+		status,
+		observacao
+	} = {}) {
     
-    this.cliente = cliente
+		this.cliente = cliente
 
-    // this should belong to another table :/
-    this.nomeCliente = cliente.nome
-    this.telefoneCliente = cliente.telefone
-    this.enderecoCliente = cliente.endereco
+		// this should belong to another table :/
+		this.nomeCliente = cliente.nome
+		this.telefoneCliente = cliente.telefone
+		this.enderecoCliente = cliente.endereco
 
-    this.id = id
-    this.itensPedido = itensPedido
-    this.formaPagamento = formaPagamento
-    this.status = status
-    this.observacao = observacao
-  }
+		this.id = id
+		this.itensPedido = itensPedido
+		this.formaPagamento = formaPagamento
+		this.status = status
+		this.observacao = observacao
+	}
 }
 
 module.exports = Pedido

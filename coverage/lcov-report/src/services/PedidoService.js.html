@@ -265,98 +265,98 @@ const ProdutoModel = require('../models/produtoModel')
 const ItemPedidoModel = require('../models/itemPedidoModel')
 const logger = require('../logger')
 async function cadastrar(pedidoData) {
-  try {
-    const pedido = new Pedido(pedidoData)
-    const registroPedido = PedidoModel.build(pedido)
-    await registroPedido.save()
-    pedido.id = registroPedido.dataValues.id
-    await cadastrarItensPedido(pedido)
-    return registroPedido
-  } <span class="branch-0 cbranch-no" title="branch not covered" >catch (error) {</span>
-<span class="cstat-no" title="statement not covered" >    const errorMessage = `Erro ao cadastrar pedido: ${error.message}`</span>
-<span class="cstat-no" title="statement not covered" >    logger.error(errorMessage)</span>
-<span class="cstat-no" title="statement not covered" >    throw new Error(errorMessage)</span>
-<span class="cstat-no" title="statement not covered" >  }</span>
+	try {
+		const pedido = new Pedido(pedidoData)
+		const registroPedido = PedidoModel.build(pedido)
+		await registroPedido.save()
+		pedido.id = registroPedido.dataValues.id
+		await cadastrarItensPedido(pedido)
+		return registroPedido
+	} <span class="branch-0 cbranch-no" title="branch not covered" >catch (error) {</span>
+<span class="cstat-no" title="statement not covered" >		const errorMessage = `Erro ao cadastrar pedido: ${error.message}`</span>
+<span class="cstat-no" title="statement not covered" >		logger.error(errorMessage)</span>
+<span class="cstat-no" title="statement not covered" >		throw new Error(errorMessage)</span>
+<span class="cstat-no" title="statement not covered" >	}</span>
 }
 &nbsp;
 async function cadastrarItensPedido(pedido) {
-  try {
-    await pedido.itensPedido.forEach(async (item) =&gt; {
-      item.produtoId = item.produto.id
-      item.pedidoId = pedido.id
-      const registroItemPedido = ItemPedidoModel.build(item)
-      await registroItemPedido.save()
-    })
-  } <span class="branch-0 cbranch-no" title="branch not covered" >catch (error) {</span>
-<span class="cstat-no" title="statement not covered" >    const errorMessage = `Erro ao cadastrar item de pedido: ${error.message}`</span>
-<span class="cstat-no" title="statement not covered" >    logger.error(errorMessage)</span>
-<span class="cstat-no" title="statement not covered" >    throw new Error(errorMessage)</span>
-<span class="cstat-no" title="statement not covered" >  }</span>
+	try {
+		await pedido.itensPedido.forEach(async (item) =&gt; {
+			item.produtoId = item.produto.id
+			item.pedidoId = pedido.id
+			const registroItemPedido = ItemPedidoModel.build(item)
+			await registroItemPedido.save()
+		})
+	} <span class="branch-0 cbranch-no" title="branch not covered" >catch (error) {</span>
+<span class="cstat-no" title="statement not covered" >		const errorMessage = `Erro ao cadastrar item de pedido: ${error.message}`</span>
+<span class="cstat-no" title="statement not covered" >		logger.error(errorMessage)</span>
+<span class="cstat-no" title="statement not covered" >		throw new Error(errorMessage)</span>
+<span class="cstat-no" title="statement not covered" >	}</span>
 }
 &nbsp;
 async function atualizarStatus(id, status) {
-  try {
-    const pedido = await PedidoModel.findOne({
-      where: {
-        id
-      }
-    })
-    if (!pedido)
-      return pedido
-    await pedido.update({
-      status
-    })
-    return await pedido.save()
-  } <span class="branch-0 cbranch-no" title="branch not covered" >catch (error) {</span>
-<span class="cstat-no" title="statement not covered" >    const errorMessage = `Erro ao atualizar status: ${error.message}`</span>
-<span class="cstat-no" title="statement not covered" >    logger.error(errorMessage)</span>
-<span class="cstat-no" title="statement not covered" >    throw new Error(errorMessage)</span>
-<span class="cstat-no" title="statement not covered" >  }</span>
+	try {
+		const pedido = await PedidoModel.findOne({
+			where: {
+				id
+			}
+		})
+		if (!pedido)
+			return pedido
+		await pedido.update({
+			status
+		})
+		return await pedido.save()
+	} <span class="branch-0 cbranch-no" title="branch not covered" >catch (error) {</span>
+<span class="cstat-no" title="statement not covered" >		const errorMessage = `Erro ao atualizar status: ${error.message}`</span>
+<span class="cstat-no" title="statement not covered" >		logger.error(errorMessage)</span>
+<span class="cstat-no" title="statement not covered" >		throw new Error(errorMessage)</span>
+<span class="cstat-no" title="statement not covered" >	}</span>
 }
 &nbsp;
 async function buscar(id) {
-  try {
-    return await PedidoModel.findOne({
-      where: {
-        id
-      },
-      include: [{
-        model: ItemPedidoModel,
-        include: [{
-          model: ProdutoModel
-        }]
-      }]
-    })
-  } <span class="branch-0 cbranch-no" title="branch not covered" >catch (error) {</span>
-<span class="cstat-no" title="statement not covered" >    const errorMessage = `Houve um erro ao buscar pedidos: ${error.message}!`</span>
-<span class="cstat-no" title="statement not covered" >    logger.error(errorMessage)</span>
-<span class="cstat-no" title="statement not covered" >    throw new Error(errorMessage)</span>
-<span class="cstat-no" title="statement not covered" >  }</span>
+	try {
+		return await PedidoModel.findOne({
+			where: {
+				id
+			},
+			include: [{
+				model: ItemPedidoModel,
+				include: [{
+					model: ProdutoModel
+				}]
+			}]
+		})
+	} <span class="branch-0 cbranch-no" title="branch not covered" >catch (error) {</span>
+<span class="cstat-no" title="statement not covered" >		const errorMessage = `Houve um erro ao buscar pedidos: ${error.message}!`</span>
+<span class="cstat-no" title="statement not covered" >		logger.error(errorMessage)</span>
+<span class="cstat-no" title="statement not covered" >		throw new Error(errorMessage)</span>
+<span class="cstat-no" title="statement not covered" >	}</span>
 }
 &nbsp;
 async function buscarTodos() {
-  try {
+	try {
 &nbsp;
-    const pedidos = await PedidoModel.findAll({
-      include: [{
-        model: ItemPedidoModel,
-        include: [{
-          model: ProdutoModel
-        }]
-      }]
-    })
-    return pedidos
-  } <span class="branch-0 cbranch-no" title="branch not covered" >catch (error) {</span>
-<span class="cstat-no" title="statement not covered" >    const errorMessage = `Houve um ao buscar pedidos: ${error.message}!`</span>
-<span class="cstat-no" title="statement not covered" >    logger.error(errorMessage)</span>
-<span class="cstat-no" title="statement not covered" >    throw new Error(errorMessage)</span>
-<span class="cstat-no" title="statement not covered" >  }</span>
+		const pedidos = await PedidoModel.findAll({
+			include: [{
+				model: ItemPedidoModel,
+				include: [{
+					model: ProdutoModel
+				}]
+			}]
+		})
+		return pedidos
+	} <span class="branch-0 cbranch-no" title="branch not covered" >catch (error) {</span>
+<span class="cstat-no" title="statement not covered" >		const errorMessage = `Houve um ao buscar pedidos: ${error.message}!`</span>
+<span class="cstat-no" title="statement not covered" >		logger.error(errorMessage)</span>
+<span class="cstat-no" title="statement not covered" >		throw new Error(errorMessage)</span>
+<span class="cstat-no" title="statement not covered" >	}</span>
 }
 module.exports = {
-  cadastrar,
-  atualizarStatus,
-  buscar,
-  buscarTodos
+	cadastrar,
+	atualizarStatus,
+	buscar,
+	buscarTodos
 }</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
@@ -364,7 +364,7 @@ module.exports = {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at Tue Jun 28 2022 22:33:16 GMT-0300 (Brasilia Standard Time)
+                at Thu Jun 30 2022 02:32:54 GMT-0300 (Brasilia Standard Time)
             </div>
         <script src="../../prettify.js"></script>
         <script>

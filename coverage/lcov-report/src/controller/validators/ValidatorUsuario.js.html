@@ -23,16 +23,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">69.38% </span>
+                <span class="strong">91.83% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>34/49</span>
+                <span class='fraction'>45/49</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">40% </span>
+                <span class="strong">83.33% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>4/10</span>
+                <span class='fraction'>10/12</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">69.38% </span>
+                <span class="strong">91.83% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>34/49</span>
+                <span class='fraction'>45/49</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line medium'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -119,94 +119,94 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">1x</span></td><td class="text"><pre class="prettyprint lang-js">const {
-  hasCamposVazios
+	hasCamposVazios
 } = require('./util')
 &nbsp;
 const camposObrigatorios = ['username', 'password', 'fullName', 'role']
-module.exports = ValidatorUsuario = {
-  validar: {
-    cadastro: (usuario) =&gt; {
-      const erros = []
-      if (hasCamposVazios(usuario, camposObrigatorios)) <span class="branch-0 cbranch-no" title="branch not covered" >{</span>
-<span class="cstat-no" title="statement not covered" >        erros.push(`Há campos obrigatórios em branco. Campos obrigatórios:\n ${camposObrigatorios.join('\n')}`)</span>
-<span class="cstat-no" title="statement not covered" >        return erros</span>
-<span class="cstat-no" title="statement not covered" >      }</span>
-      regrasUsuario.usuarioBody(usuario, erros)
-      return erros
-    },
-    edicao: (id, usuario) =&gt; {
-      const erros = []
-      if (!id || id &lt;= 0) <span class="branch-0 cbranch-no" title="branch not covered" >{</span>
-<span class="cstat-no" title="statement not covered" >        erros.push('É necessário informar um código válido de usuário para edição')</span>
-<span class="cstat-no" title="statement not covered" >        return erros</span>
-<span class="cstat-no" title="statement not covered" >      }</span>
-      if (hasCamposVazios(usuario, camposObrigatorios)) <span class="branch-0 cbranch-no" title="branch not covered" >{</span>
-<span class="cstat-no" title="statement not covered" >        erros.push(`Há campos obrigatórios em branco. Campos obrigatórios:\n ${camposObrigatorios.join('\n')}`)</span>
-<span class="cstat-no" title="statement not covered" >        return erros</span>
-<span class="cstat-no" title="statement not covered" >      }</span>
-      regrasUsuario.usuarioBody(usuario, erros)
-      return erros
-    },
-    exclusao: (id) =&gt; {
-      const erros = []
-      if (!id || id &lt;= 0) <span class="branch-0 cbranch-no" title="branch not covered" >{</span>
-<span class="cstat-no" title="statement not covered" >        erros.push('É necessário informar um código válido de usuário para exclusão')</span>
-<span class="cstat-no" title="statement not covered" >      }</span>
-      return erros
-    }
-  }
+module.exports = {
+	validar: {
+		cadastro: (usuario) =&gt; {
+			const erros = []
+			if (hasCamposVazios(usuario, camposObrigatorios)) {
+				erros.push(`Há campos obrigatórios em branco. Campos obrigatórios:\n ${camposObrigatorios.join('\n')}`)
+				return erros
+			}
+			regrasUsuario.usuarioBody(usuario, erros)
+			return erros
+		},
+		edicao: (id, usuario) =&gt; {
+			const erros = []
+			if (!id || id &lt;= 0) {
+				erros.push('É necessário informar um código válido de usuário para edição')
+				return erros
+			}
+			if (hasCamposVazios(usuario, camposObrigatorios)) {
+				erros.push(`Há campos obrigatórios em branco. Campos obrigatórios:\n ${camposObrigatorios.join('\n')}`)
+				return erros
+			}
+			regrasUsuario.usuarioBody(usuario, erros)
+			return erros
+		},
+		exclusao: (id) =&gt; {
+			const erros = []
+			if (!id || id &lt;= 0) {
+				erros.push('É necessário informar um código válido de usuário para exclusão')
+			}
+			return erros
+		}
+	}
 }
 &nbsp;
 const regrasUsuario = {
-  usuarioBody: (usuario, erros) =&gt; {
-    if (usuario.username.length &lt; 3) <span class="branch-0 cbranch-no" title="branch not covered" >{</span>
-<span class="cstat-no" title="statement not covered" >      erros.push(`O campo de nome de usuário deve possuir no mínimo três caracteres:\n ${camposObrigatorios.join('\n')}`)</span>
-<span class="cstat-no" title="statement not covered" >    }</span>
-    if (usuario.password.length &lt; 8) <span class="branch-0 cbranch-no" title="branch not covered" >{</span>
-<span class="cstat-no" title="statement not covered" >      erros.push(`O campo de nome de usuário deve possuir no mínimo três caracteres:\n ${camposObrigatorios.join('\n')}`)</span>
-<span class="cstat-no" title="statement not covered" >    }</span>
-  }
+	usuarioBody: (usuario, erros) =&gt; {
+		if (usuario.username.length &lt; 3) <span class="branch-0 cbranch-no" title="branch not covered" >{</span>
+<span class="cstat-no" title="statement not covered" >			erros.push(`O campo de nome de usuário deve possuir no mínimo três caracteres:\n ${camposObrigatorios.join('\n')}`)</span>
+<span class="cstat-no" title="statement not covered" >		}</span>
+		if (usuario.password.length &lt; 8) <span class="branch-0 cbranch-no" title="branch not covered" >{</span>
+<span class="cstat-no" title="statement not covered" >			erros.push(`O campo de nome de usuário deve possuir no mínimo três caracteres:\n ${camposObrigatorios.join('\n')}`)</span>
+<span class="cstat-no" title="statement not covered" >		}</span>
+	}
 }</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
@@ -214,7 +214,7 @@ const regrasUsuario = {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at Tue Jun 28 2022 22:33:16 GMT-0300 (Brasilia Standard Time)
+                at Thu Jun 30 2022 02:32:54 GMT-0300 (Brasilia Standard Time)
             </div>
         <script src="../../../prettify.js"></script>
         <script>

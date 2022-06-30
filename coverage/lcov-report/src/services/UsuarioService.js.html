@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">67.69% </span>
+                <span class="strong">75.38% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>44/65</span>
+                <span class='fraction'>49/65</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">42.85% </span>
+                <span class="strong">50% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>3/7</span>
+                <span class='fraction'>4/8</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">75% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>3/4</span>
+                <span class='fraction'>4/4</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">67.69% </span>
+                <span class="strong">75.38% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>44/65</span>
+                <span class='fraction'>49/65</span>
             </div>
         
             
@@ -143,14 +143,38 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -161,30 +185,6 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -196,65 +196,65 @@ const UsuarioModel = require('../models/usuarioModel')
 const logger = require('../logger')
 &nbsp;
 async function cadastrar(usuarioData) {
-  try {
-    const usuario = new Usuario(usuarioData)
-    const registroUsuario = UsuarioModel.build(usuario)
-    return await registroUsuario.save()
-  } <span class="branch-0 cbranch-no" title="branch not covered" >catch (error) {</span>
-<span class="cstat-no" title="statement not covered" >    const errorMessage = `Erro ao cadastrar usuário: ${error.message}`</span>
-<span class="cstat-no" title="statement not covered" >    logger.error(errorMessage)</span>
-<span class="cstat-no" title="statement not covered" >    throw new Error(errorMessage)</span>
-<span class="cstat-no" title="statement not covered" >  }</span>
+	try {
+		const usuario = new Usuario(usuarioData)
+		const registroUsuario = UsuarioModel.build(usuario)
+		return await registroUsuario.save()
+	} <span class="branch-0 cbranch-no" title="branch not covered" >catch (error) {</span>
+<span class="cstat-no" title="statement not covered" >		const errorMessage = `Erro ao cadastrar usuário: ${error.message}`</span>
+<span class="cstat-no" title="statement not covered" >		logger.error(errorMessage)</span>
+<span class="cstat-no" title="statement not covered" >		throw new Error(errorMessage)</span>
+<span class="cstat-no" title="statement not covered" >	}</span>
 }
 &nbsp;
 async function editar(id, usuarioData) {
-  try {
-    const registroUsuario = await UsuarioModel.findOne({
-      where: {
-        id
-      }
-    })
-    if (!registroUsuario)
-<span class="branch-0 cbranch-no" title="branch not covered" >      return r</span>egistroUsuario
-    const usuario = new Usuario(usuarioData)
-    await registroUsuario.update(usuario)
-    return await registroUsuario.save()
-  } <span class="branch-0 cbranch-no" title="branch not covered" >catch (error) {</span>
-<span class="cstat-no" title="statement not covered" >    const errorMessage = `Erro ao realizar edição de usuário: ${error.message}`</span>
-<span class="cstat-no" title="statement not covered" >    logger.error(errorMessage)</span>
-<span class="cstat-no" title="statement not covered" >    throw new Error(errorMessage)</span>
-<span class="cstat-no" title="statement not covered" >  }</span>
+	try {
+		const registroUsuario = await UsuarioModel.findOne({
+			where: {
+				id
+			}
+		})
+		if (!registroUsuario)
+			return registroUsuario
+		const usuario = new Usuario(usuarioData)
+		await registroUsuario.update(usuario)
+		return await registroUsuario.save()
+	} <span class="branch-0 cbranch-no" title="branch not covered" >catch (error) {</span>
+<span class="cstat-no" title="statement not covered" >		const errorMessage = `Erro ao realizar edição de usuário: ${error.message}`</span>
+<span class="cstat-no" title="statement not covered" >		logger.error(errorMessage)</span>
+<span class="cstat-no" title="statement not covered" >		throw new Error(errorMessage)</span>
+<span class="cstat-no" title="statement not covered" >	}</span>
 }
 &nbsp;
 async function excluir(id) {
-  try {
-    return await UsuarioModel.destroy({
-      where: {
-        id
-      }
-    })
-  } <span class="branch-0 cbranch-no" title="branch not covered" >catch (error) {</span>
-<span class="cstat-no" title="statement not covered" >    const errorMessage = `Houve um erro ao excluir usuário: ${error.message}`</span>
-<span class="cstat-no" title="statement not covered" >    logger.error(errorMessage)</span>
-<span class="cstat-no" title="statement not covered" >    throw new Error(errorMessage)</span>
-<span class="cstat-no" title="statement not covered" >  }</span>
+	try {
+		return await UsuarioModel.destroy({
+			where: {
+				id
+			}
+		})
+	} <span class="branch-0 cbranch-no" title="branch not covered" >catch (error) {</span>
+<span class="cstat-no" title="statement not covered" >		const errorMessage = `Houve um erro ao excluir usuário: ${error.message}`</span>
+<span class="cstat-no" title="statement not covered" >		logger.error(errorMessage)</span>
+<span class="cstat-no" title="statement not covered" >		throw new Error(errorMessage)</span>
+<span class="cstat-no" title="statement not covered" >	}</span>
 }
 &nbsp;
-<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >async function buscarTodos() {</span></span>
-<span class="cstat-no" title="statement not covered" >  try {</span>
-<span class="cstat-no" title="statement not covered" >    return await UsuarioModel.findAll()</span>
-<span class="cstat-no" title="statement not covered" >  } catch (error) {</span>
-<span class="cstat-no" title="statement not covered" >    const errorMessage = `Houve um erro ao buscar usuários: ${error.message}`</span>
-<span class="cstat-no" title="statement not covered" >    logger.error(errorMessage)</span>
-<span class="cstat-no" title="statement not covered" >    throw new Error(errorMessage)</span>
-<span class="cstat-no" title="statement not covered" >  }</span>
-<span class="cstat-no" title="statement not covered" >}</span>
+async function buscarTodos() {
+	try {
+		return await UsuarioModel.findAll()
+	} <span class="branch-0 cbranch-no" title="branch not covered" >catch (error) {</span>
+<span class="cstat-no" title="statement not covered" >		const errorMessage = `Houve um erro ao buscar usuários: ${error.message}`</span>
+<span class="cstat-no" title="statement not covered" >		logger.error(errorMessage)</span>
+<span class="cstat-no" title="statement not covered" >		throw new Error(errorMessage)</span>
+<span class="cstat-no" title="statement not covered" >	}</span>
+}
 &nbsp;
 module.exports = {
-  cadastrar,
-  editar,
-  excluir,
-  buscarTodos
+	cadastrar,
+	editar,
+	excluir,
+	buscarTodos
 }</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
@@ -262,7 +262,7 @@ module.exports = {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at Tue Jun 28 2022 22:33:16 GMT-0300 (Brasilia Standard Time)
+                at Thu Jun 30 2022 02:32:54 GMT-0300 (Brasilia Standard Time)
             </div>
         <script src="../../prettify.js"></script>
         <script>

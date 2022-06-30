@@ -5,11 +5,11 @@ const authController = require('./authController')
 const healthController = require('./healthController')
 
 const controller = {
-  produtoController,
-  pedidoController,
-  usuarioController,
-  authController,
-  healthController
+	produtoController,
+	pedidoController,
+	usuarioController,
+	authController,
+	healthController
 }
 
 module.exports = controller

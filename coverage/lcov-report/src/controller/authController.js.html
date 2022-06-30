@@ -300,117 +300,117 @@ const UsuarioModel = require('../models/usuarioModel')
 &nbsp;
 <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >async function login(req, res) {</span></span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >  const {</span>
-<span class="cstat-no" title="statement not covered" >    username,</span>
-<span class="cstat-no" title="statement not covered" >    password</span>
-<span class="cstat-no" title="statement not covered" >  } = req.body</span>
+<span class="cstat-no" title="statement not covered" >	const {</span>
+<span class="cstat-no" title="statement not covered" >		username,</span>
+<span class="cstat-no" title="statement not covered" >		password</span>
+<span class="cstat-no" title="statement not covered" >	} = req.body</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >  const usuario =</span>
-<span class="cstat-no" title="statement not covered" >    await UsuarioModel.findOne({</span>
-<span class="cstat-no" title="statement not covered" >      where: {</span>
-<span class="cstat-no" title="statement not covered" >        username,</span>
-<span class="cstat-no" title="statement not covered" >        password</span>
-<span class="cstat-no" title="statement not covered" >      }</span>
-<span class="cstat-no" title="statement not covered" >    })</span>
+<span class="cstat-no" title="statement not covered" >	const usuario =</span>
+<span class="cstat-no" title="statement not covered" >		await UsuarioModel.findOne({</span>
+<span class="cstat-no" title="statement not covered" >			where: {</span>
+<span class="cstat-no" title="statement not covered" >				username,</span>
+<span class="cstat-no" title="statement not covered" >				password</span>
+<span class="cstat-no" title="statement not covered" >			}</span>
+<span class="cstat-no" title="statement not covered" >		})</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >  if (!usuario)</span>
-<span class="cstat-no" title="statement not covered" >    return res.status(404).json({</span>
-<span class="cstat-no" title="statement not covered" >      message: 'user not found'</span>
-<span class="cstat-no" title="statement not covered" >    })</span>
+<span class="cstat-no" title="statement not covered" >	if (!usuario)</span>
+<span class="cstat-no" title="statement not covered" >		return res.status(404).json({</span>
+<span class="cstat-no" title="statement not covered" >			message: 'user not found'</span>
+<span class="cstat-no" title="statement not covered" >		})</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >  const jwtHash =</span>
-<span class="cstat-no" title="statement not covered" >    jwt.sign({</span>
-<span class="cstat-no" title="statement not covered" >        username,</span>
-<span class="cstat-no" title="statement not covered" >        password</span>
-<span class="cstat-no" title="statement not covered" >      },</span>
-<span class="cstat-no" title="statement not covered" >      `${process.env.NODE_ENV || 'development'} token`)</span>
+<span class="cstat-no" title="statement not covered" >	const jwtHash =</span>
+<span class="cstat-no" title="statement not covered" >		jwt.sign({</span>
+<span class="cstat-no" title="statement not covered" >			username,</span>
+<span class="cstat-no" title="statement not covered" >			password</span>
+<span class="cstat-no" title="statement not covered" >		},</span>
+<span class="cstat-no" title="statement not covered" >		`${process.env.NODE_ENV || 'development'} token`)</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >  usuario.activeSession = jwtHash</span>
-<span class="cstat-no" title="statement not covered" >  await usuario.save()</span>
+<span class="cstat-no" title="statement not covered" >	usuario.activeSession = jwtHash</span>
+<span class="cstat-no" title="statement not covered" >	await usuario.save()</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >  return res.status(200).json({</span>
-<span class="cstat-no" title="statement not covered" >    token: jwtHash</span>
-<span class="cstat-no" title="statement not covered" >  })</span>
+<span class="cstat-no" title="statement not covered" >	return res.status(200).json({</span>
+<span class="cstat-no" title="statement not covered" >		token: jwtHash</span>
+<span class="cstat-no" title="statement not covered" >	})</span>
 <span class="cstat-no" title="statement not covered" >}</span>
 &nbsp;
 <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >async function authorize(req, res) {</span></span>
-<span class="cstat-no" title="statement not covered" >  const token = req.headers.authorization</span>
-<span class="cstat-no" title="statement not covered" >  if (!token || token == 'null') {</span>
-<span class="cstat-no" title="statement not covered" >    return res.sendStatus(400)</span>
-<span class="cstat-no" title="statement not covered" >  }</span>
+<span class="cstat-no" title="statement not covered" >	const token = req.headers.authorization</span>
+<span class="cstat-no" title="statement not covered" >	if (!token || token == 'null') {</span>
+<span class="cstat-no" title="statement not covered" >		return res.sendStatus(400)</span>
+<span class="cstat-no" title="statement not covered" >	}</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >  const {</span>
-<span class="cstat-no" title="statement not covered" >    username,</span>
-<span class="cstat-no" title="statement not covered" >    password</span>
-<span class="cstat-no" title="statement not covered" >  } = jwt.decode(token, `${process.env.NODE_ENV || 'development'} token`)</span>
+<span class="cstat-no" title="statement not covered" >	const {</span>
+<span class="cstat-no" title="statement not covered" >		username,</span>
+<span class="cstat-no" title="statement not covered" >		password</span>
+<span class="cstat-no" title="statement not covered" >	} = jwt.decode(token, `${process.env.NODE_ENV || 'development'} token`)</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >  let usuario</span>
-<span class="cstat-no" title="statement not covered" >  try {</span>
-<span class="cstat-no" title="statement not covered" >    usuario = await UsuarioModel.findOne({</span>
-<span class="cstat-no" title="statement not covered" >      where: {</span>
-<span class="cstat-no" title="statement not covered" >        username,</span>
-<span class="cstat-no" title="statement not covered" >        password</span>
-<span class="cstat-no" title="statement not covered" >      }</span>
-<span class="cstat-no" title="statement not covered" >    })</span>
-<span class="cstat-no" title="statement not covered" >  } catch (err) {</span>
-<span class="cstat-no" title="statement not covered" >    console.error(err)</span>
-<span class="cstat-no" title="statement not covered" >    return res.sendStatus(500)</span>
-<span class="cstat-no" title="statement not covered" >  }</span>
+<span class="cstat-no" title="statement not covered" >	let usuario</span>
+<span class="cstat-no" title="statement not covered" >	try {</span>
+<span class="cstat-no" title="statement not covered" >		usuario = await UsuarioModel.findOne({</span>
+<span class="cstat-no" title="statement not covered" >			where: {</span>
+<span class="cstat-no" title="statement not covered" >				username,</span>
+<span class="cstat-no" title="statement not covered" >				password</span>
+<span class="cstat-no" title="statement not covered" >			}</span>
+<span class="cstat-no" title="statement not covered" >		})</span>
+<span class="cstat-no" title="statement not covered" >	} catch (err) {</span>
+<span class="cstat-no" title="statement not covered" >		console.error(err)</span>
+<span class="cstat-no" title="statement not covered" >		return res.sendStatus(500)</span>
+<span class="cstat-no" title="statement not covered" >	}</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >  if (!usuario) {</span>
-<span class="cstat-no" title="statement not covered" >    return res.status(404).json({</span>
-<span class="cstat-no" title="statement not covered" >      message: 'Usuário não encontrado'</span>
-<span class="cstat-no" title="statement not covered" >    })</span>
-<span class="cstat-no" title="statement not covered" >  }</span>
+<span class="cstat-no" title="statement not covered" >	if (!usuario) {</span>
+<span class="cstat-no" title="statement not covered" >		return res.status(404).json({</span>
+<span class="cstat-no" title="statement not covered" >			message: 'Usuário não encontrado'</span>
+<span class="cstat-no" title="statement not covered" >		})</span>
+<span class="cstat-no" title="statement not covered" >	}</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >  if (usuario.activeSession != token) {</span>
-<span class="cstat-no" title="statement not covered" >    try {</span>
-<span class="cstat-no" title="statement not covered" >      usuario.activeSession = token</span>
-<span class="cstat-no" title="statement not covered" >      await usuario.save()</span>
-<span class="cstat-no" title="statement not covered" >    } catch (err) {</span>
-<span class="cstat-no" title="statement not covered" >      console.error(err)</span>
-<span class="cstat-no" title="statement not covered" >      return res.sendStatus(500)</span>
-<span class="cstat-no" title="statement not covered" >    }</span>
-<span class="cstat-no" title="statement not covered" >  }</span>
+<span class="cstat-no" title="statement not covered" >	if (usuario.activeSession != token) {</span>
+<span class="cstat-no" title="statement not covered" >		try {</span>
+<span class="cstat-no" title="statement not covered" >			usuario.activeSession = token</span>
+<span class="cstat-no" title="statement not covered" >			await usuario.save()</span>
+<span class="cstat-no" title="statement not covered" >		} catch (err) {</span>
+<span class="cstat-no" title="statement not covered" >			console.error(err)</span>
+<span class="cstat-no" title="statement not covered" >			return res.sendStatus(500)</span>
+<span class="cstat-no" title="statement not covered" >		}</span>
+<span class="cstat-no" title="statement not covered" >	}</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >  return res.status(200).json({</span>
-<span class="cstat-no" title="statement not covered" >    authorized: true</span>
-<span class="cstat-no" title="statement not covered" >  })</span>
+<span class="cstat-no" title="statement not covered" >	return res.status(200).json({</span>
+<span class="cstat-no" title="statement not covered" >		authorized: true</span>
+<span class="cstat-no" title="statement not covered" >	})</span>
 <span class="cstat-no" title="statement not covered" >}</span>
 &nbsp;
 <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >async function logout(req, res) {</span></span>
-<span class="cstat-no" title="statement not covered" >  const token = req.headers.authorization</span>
-<span class="cstat-no" title="statement not covered" >  if (!token) {</span>
-<span class="cstat-no" title="statement not covered" >    req.redirect('/login')</span>
-<span class="cstat-no" title="statement not covered" >    return res.sendStatus(400)</span>
-<span class="cstat-no" title="statement not covered" >  }</span>
-<span class="cstat-no" title="statement not covered" >  const {</span>
-<span class="cstat-no" title="statement not covered" >    username,</span>
-<span class="cstat-no" title="statement not covered" >    password</span>
-<span class="cstat-no" title="statement not covered" >  } = jwt.decode(token, `${process.env.NODE_ENV || 'development'} token`)</span>
+<span class="cstat-no" title="statement not covered" >	const token = req.headers.authorization</span>
+<span class="cstat-no" title="statement not covered" >	if (!token) {</span>
+<span class="cstat-no" title="statement not covered" >		req.redirect('/login')</span>
+<span class="cstat-no" title="statement not covered" >		return res.sendStatus(400)</span>
+<span class="cstat-no" title="statement not covered" >	}</span>
+<span class="cstat-no" title="statement not covered" >	const {</span>
+<span class="cstat-no" title="statement not covered" >		username,</span>
+<span class="cstat-no" title="statement not covered" >		password</span>
+<span class="cstat-no" title="statement not covered" >	} = jwt.decode(token, `${process.env.NODE_ENV || 'development'} token`)</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >  let usuario</span>
-<span class="cstat-no" title="statement not covered" >  try {</span>
-<span class="cstat-no" title="statement not covered" >    usuario = await UsuarioModel.findOne({</span>
-<span class="cstat-no" title="statement not covered" >      where: {</span>
-<span class="cstat-no" title="statement not covered" >        username,</span>
-<span class="cstat-no" title="statement not covered" >        password</span>
-<span class="cstat-no" title="statement not covered" >      }</span>
-<span class="cstat-no" title="statement not covered" >    })</span>
+<span class="cstat-no" title="statement not covered" >	let usuario</span>
+<span class="cstat-no" title="statement not covered" >	try {</span>
+<span class="cstat-no" title="statement not covered" >		usuario = await UsuarioModel.findOne({</span>
+<span class="cstat-no" title="statement not covered" >			where: {</span>
+<span class="cstat-no" title="statement not covered" >				username,</span>
+<span class="cstat-no" title="statement not covered" >				password</span>
+<span class="cstat-no" title="statement not covered" >			}</span>
+<span class="cstat-no" title="statement not covered" >		})</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >    usuario.activeSession = ''</span>
-<span class="cstat-no" title="statement not covered" >  } catch (err) {</span>
-<span class="cstat-no" title="statement not covered" >    console.error(err)</span>
-<span class="cstat-no" title="statement not covered" >    return res.sendStatus(500)</span>
-<span class="cstat-no" title="statement not covered" >  }</span>
+<span class="cstat-no" title="statement not covered" >		usuario.activeSession = ''</span>
+<span class="cstat-no" title="statement not covered" >	} catch (err) {</span>
+<span class="cstat-no" title="statement not covered" >		console.error(err)</span>
+<span class="cstat-no" title="statement not covered" >		return res.sendStatus(500)</span>
+<span class="cstat-no" title="statement not covered" >	}</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >  res.sendStatus(204)</span>
+<span class="cstat-no" title="statement not covered" >	res.sendStatus(204)</span>
 <span class="cstat-no" title="statement not covered" >}</span>
 &nbsp;
 module.exports = {
-  login,
-  authorize,
-  logout
+	login,
+	authorize,
+	logout
 }</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
@@ -418,7 +418,7 @@ module.exports = {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at Tue Jun 28 2022 22:33:16 GMT-0300 (Brasilia Standard Time)
+                at Thu Jun 30 2022 02:32:54 GMT-0300 (Brasilia Standard Time)
             </div>
         <script src="../../prettify.js"></script>
         <script>

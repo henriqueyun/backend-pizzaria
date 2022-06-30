@@ -23,16 +23,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">79.77% </span>
+                <span class="strong">84.26% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>71/89</span>
+                <span class='fraction'>75/89</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">50% </span>
+                <span class="strong">61.53% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>6/12</span>
+                <span class='fraction'>8/13</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">79.77% </span>
+                <span class="strong">84.26% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>71/89</span>
+                <span class='fraction'>75/89</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line medium'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -199,26 +199,26 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -245,87 +245,87 @@ const existirErros = require('./validators/erros')
 const logger = require('../logger')
 &nbsp;
 async function cadastrar(req, res) {
-  try {
-    const erros = ValidatorPedido.validar.cadastro(req.body)
-    const mensagemErro = existirErros(erros)
-    if (mensagemErro) {
-      return res.status(400).json({
-        erros: mensagemErro
-      })
-    }
-    const pedido = await PedidoService.cadastrar(req.body)
-    return res.status(201).json(pedido)
-  } <span class="branch-0 cbranch-no" title="branch not covered" >catch (error) {</span>
-<span class="cstat-no" title="statement not covered" >    logger.error(error)</span>
-<span class="cstat-no" title="statement not covered" >    return res.sendStatus(500)</span>
-<span class="cstat-no" title="statement not covered" >  }</span>
+	try {
+		const erros = ValidatorPedido.validar.cadastro(req.body)
+		const mensagemErro = existirErros(erros)
+		if (mensagemErro) {
+			return res.status(400).json({
+				erros: mensagemErro
+			})
+		}
+		const pedido = await PedidoService.cadastrar(req.body)
+		return res.status(201).json(pedido)
+	} <span class="branch-0 cbranch-no" title="branch not covered" >catch (error) {</span>
+<span class="cstat-no" title="statement not covered" >		logger.error(error)</span>
+<span class="cstat-no" title="statement not covered" >		return res.sendStatus(500)</span>
+<span class="cstat-no" title="statement not covered" >	}</span>
 }
 &nbsp;
 async function atualizarStatus(req, res) {
-  try {
-    const {
-      id
-    } = req.params
-    const {
-      status
-    } = req.body
-    const erros = ValidatorPedido.validar.atualizacaoStatus(id, status)
-    const mensagemErro = existirErros(erros)
-    if (mensagemErro) {
-      return res.status(400).json({
-        erros: mensagemErro
-      })
-    }
-    const pedido = await PedidoService.atualizarStatus(id, status)
-    if (!pedido) {
-      return res.status(404).send(`Não foi possível encontrar pedido com o código ${id}`)
-    }
-    return res.status(200).json(pedido)
-  } <span class="branch-0 cbranch-no" title="branch not covered" >catch (error) {</span>
-<span class="cstat-no" title="statement not covered" >    logger.error(error)</span>
-<span class="cstat-no" title="statement not covered" >    return res.sendStatus(500)</span>
-<span class="cstat-no" title="statement not covered" >  }</span>
+	try {
+		const {
+			id
+		} = req.params
+		const {
+			status
+		} = req.body
+		const erros = ValidatorPedido.validar.atualizacaoStatus(id, status)
+		const mensagemErro = existirErros(erros)
+		if (mensagemErro) {
+			return res.status(400).json({
+				erros: mensagemErro
+			})
+		}
+		const pedido = await PedidoService.atualizarStatus(id, status)
+		if (!pedido) {
+			return res.status(404).send(`Não foi possível encontrar pedido com o código ${id}`)
+		}
+		return res.status(200).json(pedido)
+	} <span class="branch-0 cbranch-no" title="branch not covered" >catch (error) {</span>
+<span class="cstat-no" title="statement not covered" >		logger.error(error)</span>
+<span class="cstat-no" title="statement not covered" >		return res.sendStatus(500)</span>
+<span class="cstat-no" title="statement not covered" >	}</span>
 }
 &nbsp;
 async function buscar(req, res) {
-  try {
-    const { id } = req.params
-    const erros = ValidatorPedido.validar.busca(id)
-    const mensagemErro = existirErros(erros)
-    if (mensagemErro) <span class="branch-0 cbranch-no" title="branch not covered" >{</span>
-<span class="cstat-no" title="statement not covered" >      return res.status(400).json({</span>
-<span class="cstat-no" title="statement not covered" >        erros: mensagemErro</span>
-<span class="cstat-no" title="statement not covered" >      })</span>
-<span class="cstat-no" title="statement not covered" >    }</span>
-    const pedido = await PedidoService.buscar(id)
-    if (!pedido) {
-      return res.status(404).send(`Não foi possível encontrar pedido com o código ${id}`)
-    }
-    return res.status(200).json(pedido)
-  } <span class="branch-0 cbranch-no" title="branch not covered" >catch (error) {</span>
-<span class="cstat-no" title="statement not covered" >    logger.error(error)</span>
-<span class="cstat-no" title="statement not covered" >    return res.sendStatus(500)</span>
-<span class="cstat-no" title="statement not covered" >  }</span>
+	try {
+		const { id } = req.params
+		const erros = ValidatorPedido.validar.busca(id)
+		const mensagemErro = existirErros(erros)
+		if (mensagemErro) {
+			return res.status(400).json({
+				erros: mensagemErro
+			})
+		}
+		const pedido = await PedidoService.buscar(id)
+		if (!pedido) {
+			return res.status(404).send(`Não foi possível encontrar pedido com o código ${id}`)
+		}
+		return res.status(200).json(pedido)
+	} <span class="branch-0 cbranch-no" title="branch not covered" >catch (error) {</span>
+<span class="cstat-no" title="statement not covered" >		logger.error(error)</span>
+<span class="cstat-no" title="statement not covered" >		return res.sendStatus(500)</span>
+<span class="cstat-no" title="statement not covered" >	}</span>
 }
 &nbsp;
 async function buscarTodos(_, res) {
-  try {
-    const pedidos = await PedidoService.buscarTodos()
-    if (!pedidos.length) <span class="branch-0 cbranch-no" title="branch not covered" >{</span>
-<span class="cstat-no" title="statement not covered" >      return res.status(404).send('Não existem pedidos cadastrados')</span>
-<span class="cstat-no" title="statement not covered" >    }</span>
-    return res.status(200).json(pedidos)
-  } <span class="branch-0 cbranch-no" title="branch not covered" >catch (error) {</span>
-<span class="cstat-no" title="statement not covered" >    logger.error(error)</span>
-<span class="cstat-no" title="statement not covered" >    return res.sendStatus(500)</span>
-<span class="cstat-no" title="statement not covered" >  }</span>
+	try {
+		const pedidos = await PedidoService.buscarTodos()
+		if (!pedidos.length) <span class="branch-0 cbranch-no" title="branch not covered" >{</span>
+<span class="cstat-no" title="statement not covered" >			return res.status(404).send('Não existem pedidos cadastrados')</span>
+<span class="cstat-no" title="statement not covered" >		}</span>
+		return res.status(200).json(pedidos)
+	} <span class="branch-0 cbranch-no" title="branch not covered" >catch (error) {</span>
+<span class="cstat-no" title="statement not covered" >		logger.error(error)</span>
+<span class="cstat-no" title="statement not covered" >		return res.sendStatus(500)</span>
+<span class="cstat-no" title="statement not covered" >	}</span>
 }
 &nbsp;
 const pedidoController = {
-  cadastrar,
-  atualizarStatus,
-  buscar,
-  buscarTodos
+	cadastrar,
+	atualizarStatus,
+	buscar,
+	buscarTodos
 }
 module.exports = pedidoController</pre></td></tr></table></pre>
 
@@ -334,7 +334,7 @@ module.exports = pedidoController</pre></td></tr></table></pre>
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at Tue Jun 28 2022 22:33:16 GMT-0300 (Brasilia Standard Time)
+                at Thu Jun 30 2022 02:32:54 GMT-0300 (Brasilia Standard Time)
             </div>
         <script src="../../prettify.js"></script>
         <script>

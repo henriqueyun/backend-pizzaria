@@ -1,12 +1,12 @@
 const config = {
-  databaseName: process.env.DB_NAME || 'pizzaria',
-  databaseUser: process.env.DB_USER || 'root',
-  databasePassword: process.env.DB_PASSWORD || 'root',
-  databaseHost: process.env.DB_HOST || 'localhost',
-  databasePort: process.env.DB_PORT || 3306,
-  logLevel: process.env.LOG_LEVEL || 'info',
-  port: process.env.PORT || 8010,
-  imgurToken: process.env.IMGUR_TOKEN
+	databaseName: process.env.DB_NAME || 'pizzaria',
+	databaseUser: process.env.DB_USER || 'root',
+	databasePassword: process.env.DB_PASSWORD || 'root',
+	databaseHost: process.env.DB_HOST || 'localhost',
+	databasePort: process.env.DB_PORT || 3306,
+	logLevel: process.env.LOG_LEVEL || 'info',
+	port: process.env.PORT || 8010,
+	imgurToken: process.env.IMGUR_TOKEN
 }
 
 module.exports = config
