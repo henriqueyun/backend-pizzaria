@@ -1,6 +1,5 @@
 const app = require('../app')
 const supertest = require('supertest')
-
 const Produto = require('../classes/Produto')
 
 let endpointProduto = '/api/v1/produto'
@@ -32,7 +31,7 @@ const pizzaInvalida = new Produto({
 
 describe('CRUD produto', () => {
 	it('Deve cadastrar um produto', async () => {
-		await supertest(app)
+		const novaBebida = await supertest(app)
 			.post(endpointProduto)
 			.send(bebida)
 			.expect(201)
@@ -40,19 +39,37 @@ describe('CRUD produto', () => {
 		const novaPizza = await supertest(app)
 			.post(endpointProduto)
 			.send(pizza)
-			.expect(201)
+
+		expect(novaPizza.body).toEqual({
+			...pizza,
+			id: expect.any(Number),
+			createdAt: expect.any(String),
+			updatedAt: expect.any(String)
+		})
+		expect(novaBebida.body).toEqual({
+			...bebida,
+			id: expect.any(Number),
+			createdAt: expect.any(String),
+			updatedAt: expect.any(String)
+		})
+		expect(novaBebida.status).toBe(201)
+		expect(novaPizza.status).toBe(201)
 		idPizza = novaPizza.body.id
 	})
 
 	it('Deve buscar um produto', async () => {
 		const pizzaBuscada = await supertest(app)
 			.get(`${endpointProduto}/${idPizza}`)
-			.expect(200)
-		expect(pizzaBuscada.body.nome).toBe(pizza.nome)
-		expect(pizzaBuscada.body.preco).toBe(pizza.preco)
-		expect(pizzaBuscada.body.tipo).toBe(pizza.tipo)
-		expect(pizzaBuscada.body.imgURL).toBe(pizza.imgURL)
-		expect(pizzaBuscada.body.ingredientes).toBe(pizza.ingredientes)
+
+		expect(pizzaBuscada.body).toEqual({
+			...pizza,
+			id: expect.any(Number),
+			createdAt: expect.any(String),
+			updatedAt: expect.any(String),
+			volume: 0,
+			alcoolica: false
+		})
+		expect(pizzaBuscada.status).toBe(200)
 	})
 
 	it('Deve buscar diferentes produtos', async () => {
@@ -74,74 +91,80 @@ describe('CRUD produto', () => {
 	})
 
 	it('Deve excluir um produto', async () => {
-		await supertest(app)
+		const pizzaResponse = await supertest(app)
 			.delete(`${endpointProduto}/${idPizza}`)
 			.expect(200)
+		expect(pizzaResponse.body).toBeGreaterThanOrEqual(0)
 	})
 
 	it('Deve dar erro ao cadastrar um produto por falta de parâmetros obrigatórios', async () => {
-		await supertest(app)
+		const pizzaResponseInvalida = await supertest(app)
 			.post(endpointProduto)
 			.send(pizzaInvalida)
-			.expect(400)
+		expect(pizzaResponseInvalida.status).toBe(400)
+		expect(pizzaResponseInvalida.body).toHaveProperty('erros')
 	})
 
 	it('Deve dar erro ao cadastrar um produto por conta de parâmetros inválidos', async () => {
 		pizzaInvalida.preco = '-13'
-		await supertest(app)
+		const pizzaResponseInvalida = await supertest(app)
 			.post(endpointProduto)
 			.send(pizzaInvalida)
 			.expect(400)
+		expect(pizzaResponseInvalida.status).toBe(400)
+		expect(pizzaResponseInvalida.body).toHaveProperty('erros')
 	})
 
 	it('Deve dar erro ao editar um produto por falta de informações', async () => {
-		pizza.nome = 'Nomuçarela'
-		pizza.preco = 45
-		await supertest(app)
+		const produtoInfoInvalida = await supertest(app)
 			.put(`${endpointProduto}/${idPizza}`)
-			.expect(400)
+		expect(produtoInfoInvalida.status).toBe(400)
+		expect(produtoInfoInvalida.body).toHaveProperty('erros')
 	})
 
-	
+
 	it('Deve dar erro ao editar um produto por informar código não existente', async () => {
-		pizza.nome = 'Nomuçarela'
-		pizza.preco = 45
-		await supertest(app)
+		pizza.nome = 'Invaliduçarela'
+		pizza.preco = 99
+		const pizzaResponseInvalida = await supertest(app)
 			.put(`${endpointProduto}/9999`)
 			.send(pizza)
-			.expect(404)
+		expect(pizzaResponseInvalida.status).toBe(404)
 	})
 
-	it('Deve dar erro ao editar um produto por passar dados do novo produt inválido', async () => {
+	it('Deve dar erro ao editar um produto por passar novos dados do produto inválido', async () => {
 		pizza.nome = ''
 		pizza.preco = 0
-		await supertest(app)
+		const pizzaResponseInvalida = await supertest(app)
 			.put(`${endpointProduto}/9999`)
 			.send(pizza)
-			.expect(400)
+		expect(pizzaResponseInvalida.status).toBe(400)
+		expect(pizzaResponseInvalida.body).toHaveProperty('erros')
 	})
 
 	it('Deve dar erro ao excluir um produto com código não existente', async () => {
-		await supertest(app)
+		const pizzaResponseInvalida = await supertest(app)
 			.delete(`${endpointProduto}/9999`)
-			.expect(404)
+		expect(pizzaResponseInvalida.status).toBe(404)
 	})
 
 	it('Deve dar erro ao buscar um produto por informar código não existente', async () => {
-		await supertest(app)
+		const pizzaResponseInvalida = await supertest(app)
 			.get(`${endpointProduto}/9999`)
-			.expect(404)
+		expect(pizzaResponseInvalida.status).toBe(404)
 	})
 
 	it('Deve dar erro ao excluir um produto com código negativo', async () => {
-		await supertest(app)
+		const pizzaResponseInvalida = await supertest(app)
 			.delete(`${endpointProduto}/-1`)
-			.expect(400)
+		expect(pizzaResponseInvalida.status).toBe(400)
+		expect(pizzaResponseInvalida.body).toHaveProperty('erros')
 	})
 
 	it('Deve dar erro ao buscar um produto por informar código negativo', async () => {
-		await supertest(app)
+		const pizzaResponseInvalida = await supertest(app)
 			.get(`${endpointProduto}/-1`)
-			.expect(400)
+		expect(pizzaResponseInvalida.status).toBe(400)
+		expect(pizzaResponseInvalida.body).toHaveProperty('erros')
 	})
 })

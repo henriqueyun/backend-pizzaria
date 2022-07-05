@@ -5,8 +5,9 @@ let endpointHealthchecker = '/api/v1/health'
 
 describe('Health Checker', () => {
 	it('Deve encontrar algo', async () => {
-		await supertest(app)
+		const healthCheckResponse = await supertest(app)
 			.get(endpointHealthchecker)
-			.expect(200)
+		expect(healthCheckResponse.status).toBe(200)
+		expect(healthCheckResponse.text).toBe('Health Ok')
 	})
 })
