@@ -24,7 +24,14 @@ describe('CRUD usuários', () => {
 		const novoUsuario = await supertest(app)
 			.post(endpointUsuario)
 			.send(usuario)
-			.expect(201)
+
+		expect(novoUsuario.status).toBe(201)
+		expect(novoUsuario.body).toEqual({
+			...usuario,
+			createdAt: expect.any(String),
+			updatedAt: expect.any(String),
+			id: expect.any(Number)
+		})
 		idUsuario = novoUsuario.body.id
 	})
 
@@ -34,61 +41,66 @@ describe('CRUD usuários', () => {
 		const usuarioEditado = await supertest(app)
 			.put(`${endpointUsuario}/${idUsuario}`)
 			.send(usuario)
-			.expect(200)
+		expect(usuarioEditado.status).toBe(200)
 		expect(usuarioEditado.body.username).toBe('Zaza')
 		expect(usuarioEditado.body.password).toBe('87654321')
 	})
 
 	it('Deve buscar todos os usuários', async () => {
-		await supertest(app)
+		const usuariosBuscados = await supertest(app)
 			.get(`${endpointUsuario}/all`)
-			.expect(200)
+		expect(usuariosBuscados.status).toBe(200)
+		expect(usuariosBuscados.body.length).toBeGreaterThan(0)
 	})
 
 	it('Deve dar erro ao excluir um usuário com código menor que 0', async () => {
-		await supertest(app)
+		const usuarioResponseInvalido = await supertest(app)
 			.delete(`${endpointUsuario}/-1`)
-			.expect(400)
+		expect(usuarioResponseInvalido.status).toBe(400)
 	})
 
 	it('Deve dar erro ao cadastrar um usuário com dados inválidos', async () => {
-		await supertest(app)
+		const usuarioResponseInvalido = await supertest(app)
 			.post(endpointUsuario)
 			.send(usuarioInvalido)
-			.expect(400)
+		expect(usuarioResponseInvalido.status).toBe(400)
+		expect(usuarioResponseInvalido.body).toHaveProperty('erros')
 	})
 
 	it('Deve dar erro ao editar um usuário com dados inválidos', async () => {
-		await supertest(app)
+		const usuarioResponseInvalido = await supertest(app)
 			.put(`${endpointUsuario}/${idUsuario}`)
 			.send(endpointUsuario)
-			.expect(400)
+		expect(usuarioResponseInvalido.status).toBe(400)
+		expect(usuarioResponseInvalido.body).toHaveProperty('erros')
 	})
 
 	it('Deve dar erro ao editar um usuário com código menor que 0', async () => {
-		await supertest(app)
+		const usuarioResponseInvalido = await supertest(app)
 			.put(`${endpointUsuario}/-1`)
 			.send(usuario)
-			.expect(400)
+		expect(usuarioResponseInvalido.status).toBe(400)
+		expect(usuarioResponseInvalido.body).toHaveProperty('erros')
 	})
 
 	it('Deve dar erro ao editar um usuário com código não existente', async () => {
 		usuario.username = 'Zozo'
-		await supertest(app)
+		const usuarioResponseInvalido = await supertest(app)
 			.put(`${endpointUsuario}/9999`)
 			.send(usuario)
-			.expect(404)
+		expect(usuarioResponseInvalido.status).toBe(404)
 	})
 
 	it('Deve dar erro ao excluir um usuário com código não existente', async () => {
-		await supertest(app)
+		const usuarioResponseInvalido = await supertest(app)
 			.delete(`${endpointUsuario}/9999`)
-			.expect(404)
+		expect(usuarioResponseInvalido.status).toBe(404)
 	})
-
+	// precisa ser o último teste
 	it('Deve excluir um usuário', async () => {
-		await supertest(app)
+		const usuarioResponse = await supertest(app)
 			.delete(`${endpointUsuario}/${idUsuario}`)
 			.expect(200)
+		expect(usuarioResponse.body).toBeGreaterThanOrEqual(0)
 	})
 })

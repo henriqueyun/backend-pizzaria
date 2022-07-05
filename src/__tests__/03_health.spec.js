@@ -1,8 +1,10 @@
+
 const app = require('../app')
 const supertest = require('supertest')
 
 let endpointHealthchecker = '/api/v1/health'
 
+jest.useFakeTimers()
 describe('Health Checker', () => {
 	it('Deve encontrar algo', async () => {
 		const healthCheckResponse = await supertest(app)

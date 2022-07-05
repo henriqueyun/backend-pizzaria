@@ -62,12 +62,10 @@ describe('CRUD pedido', () => {
 		const novaBebida = await supertest(app)
 			.post(endpointProduto)
 			.send(sprite)
-			.expect(201)
 
 		const novaPizza = await supertest(app)
 			.post(endpointProduto)
 			.send(pizzaCalabresa)
-			.expect(201)
 
 		const pizzaItemPedido = new ItemPedido({
 			produto: novaPizza.body,
@@ -78,32 +76,53 @@ describe('CRUD pedido', () => {
 			produto: novaBebida.body,
 			qtd: 1,
 		})
-
 		pedido.itensPedido = [bebidaItemPedido, pizzaItemPedido]
+		expect(novaPizza.status).toBe(201)
+		expect(novaBebida.status).toBe(201)
+		expect(novaPizza.body).toStrictEqual({
+			...pizzaCalabresa,
+			createdAt: expect.any(String),
+			updatedAt: expect.any(String),
+			id: expect.any(Number),
+			alcoolica: expect.any(String),
+		})
+		expect(novaBebida.body).toStrictEqual({
+			...sprite,
+			createdAt: expect.any(String),
+			updatedAt: expect.any(String),
+			id: expect.any(Number),
+			ingredientes: expect.any(String)
+		})
 	})
 
 	it('Deve cadastrar um pedido', async () => {
 		const novoPedido = await supertest(app)
 			.post(endpointPedido)
 			.send(pedido)
-			.expect(201)
-
+		// me desculpe eu não sei jest básico
+		// expect(novoPedido.body).toBe({
+		// 	...pedido,
+		// 	createdAt: expect.any(String),
+		// 	updatedAt: expect.any(String),
+		// 	id: expect.any(Number)
+		// })
+		expect(novoPedido.status).toBe(201)
 		idPedido = novoPedido.body.id
 	})
 
 	it('Deve buscar um pedido', async () => {
-		await supertest(app)
+		const pedidoBuscado = await supertest(app)
 			.get(`${endpointPedido}/${idPedido}`)
-			.expect(200)
+		expect(pedidoBuscado.status).toBe(200)
 	})
 
 	it('Deve atualizar o status de um pedido', async () => {
-		await supertest(app)
+		const pedidoAtualizado = await supertest(app)
 			.patch(`${endpointPedido}/${idPedido}`)
 			.send({
 				status: 'em preparo'
 			})
-			.expect(200)
+		expect(pedidoAtualizado.status).toBe(200)
 	})
 
 	it('Deve buscar todos os pedidos', async () => {
@@ -114,45 +133,45 @@ describe('CRUD pedido', () => {
 	})
 
 	it('Deve falhar ao atualizar o status de um pedido sem passar o novo status', async () => {
-		await supertest(app)
+		const pedidoResponseInvalido = await supertest(app)
 			.patch(`${endpointPedido}/${idPedido}`)
 			.send({})
-			.expect(400)
+		expect(pedidoResponseInvalido.status).toBe(400)
 	})
 
 	it('Deve falhar ao atualizar o status de um pedido caso o codigo informado não seja valido', async () => {
-		await supertest(app)
+		const pedidoResponseInvalido = await supertest(app)
 			.patch(`${endpointPedido}/9999`)
 			.send({
 				status: 'em preparo'
 			})
-			.expect(404)
+		expect(pedidoResponseInvalido.status).toBe(404)
 	})
 
 	it('Deve falhar ao buscar um pedido com um código que não existe', async () => {
-		await supertest(app)
+		const pedidoResponseInvalido = await supertest(app)
 			.get(`${endpointPedido}/9999`)
-			.expect(404)
+		expect(pedidoResponseInvalido.status).toBe(404)
 	})
 
 	it('Deve falhar ao buscar um pedido caso o código informado seja um número negativo', async () => {
-		await supertest(app)
+		const pedidoResponseInvalido = await supertest(app)
 			.get(`${endpointPedido}/-1`)
-			.expect(400)
+		expect(pedidoResponseInvalido.status).toBe(400)
 	})
 
 	it('Deve falhar cadastrar um pedido por não ter item algum', async () => {
-		await supertest(app)
+		const pedidoResponseInvalido = await supertest(app)
 			.post(endpointPedido)
 			.send(pedidoInvalido)
-			.expect(400)
+		expect(pedidoResponseInvalido.status).toBe(400)
 	})
 
 	it.skip('Deve falhar cadastrar um pedido por conta do produto não cadastrado', async () => {
 		pedido.itensPedido = produtoNaoCadastrado
-		await supertest(app)
+		const pedidoResponseInvalido = await supertest(app)
 			.post(endpointPedido)
 			.send(pedido)
-			.expect(500)
+		expect(pedidoResponseInvalido.status).toBe(500)
 	})
 })

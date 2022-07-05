@@ -9,7 +9,7 @@ async function cadastrar(pedidoData) {
 		const registroPedido = PedidoModel.build(pedido)
 		await registroPedido.save()
 		pedido.id = registroPedido.dataValues.id
-		await cadastrarItensPedido(pedido)
+		await registroPedido.update({ itensPedido: await cadastrarItensPedido(pedido)})
 		return registroPedido
 	} catch (error) {
 		const errorMessage = `Erro ao cadastrar pedido: ${error.message}`
@@ -20,12 +20,13 @@ async function cadastrar(pedidoData) {
 
 async function cadastrarItensPedido(pedido) {
 	try {
-		await pedido.itensPedido.forEach(async (item) => {
+		await pedido.itensPedido.map(async (item) => {
 			item.produtoId = item.produto.id
 			item.pedidoId = pedido.id
 			const registroItemPedido = ItemPedidoModel.build(item)
-			await registroItemPedido.save()
+			return await registroItemPedido.save()
 		})
+		return pedido.itensPedido
 	} catch (error) {
 		const errorMessage = `Erro ao cadastrar item de pedido: ${error.message}`
 		logger.error(errorMessage)
